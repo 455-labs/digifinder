@@ -13,6 +13,7 @@ DigiFinder is a Vue-based frontend application that allows users to search for D
     - [index.html](#indexhtml)
     - [main.js](#mainjs)
     - [App.vue](#appvue)
+    - [How These Files Work Together](#how-these-files-work-together)
   - [Commit Message Guidelines](#commit-message-guidelines)
     - [General Principles](#general-principles)
     - [Common Prefixes and Their Usage](#commit-message-guidelines)
@@ -92,6 +93,25 @@ export default {
 
 All other components are typically children of `App.vue`.
 
+### How These Files Work Together
+
+Simple flow diagram:
+
+```
+index.html
+   ↓ loads
+src/main.js
+   ↓ mounts Vue app
+App.vue (root component)
+   ↓ includes other components
+components/YourComponent.vue
+```
+
+**index.html** – the static HTML entry<br>
+**main.js** – boots Vue<br>
+**App.vue** – the main visible component<br>
+**Other components** – build up the rest of the app<br>
+
 ## Commit Message Guidelines
 
 To maintain a clear Git history, follow these unified best practices for commit messages.
@@ -107,17 +127,17 @@ To maintain a clear Git history, follow these unified best practices for commit 
 
 Use a consistent type prefix at the start of your subject:
 
-- **feat:** for a new feature
-  - _Example:_ `feat: Add search functionality`
-- **fix:** for a bug fix
-  - _Example:_ `fix: Correct login button alignment`
-- **refactor:** for code restructuring without behavior change
-  - _Example:_ `refactor: Simplify API service logic`
-- **chore:** for maintenance tasks, updates to config, build scripts etc.
-  - _Example:_ `chore: Update dependencies to latest versions`
-- **docs:** for documentation changes
-  - _Example:_ `docs: Add commit message guidelines`
-- **style:** for changes that don’t affect logic (formatting, whitespace)
-  - _Example:_ `style: Adjust indentation in components`
-- **test:** for adding or updating tests
-  - _Example:_ `test: Add unit tests for utils functions`
+- **feat:** for a new feature<br>
+  _Example:_ `feat: Add search functionality`
+- **fix:** for a bug fix<br>
+  _Example:_ `fix: Correct login button alignment`
+- **refactor:** for code restructuring without behavior change<br>
+  _Example:_ `refactor: Simplify API service logic`
+- **chore:** for maintenance tasks, updates to config, build scripts etc.<br>
+  _Example:_ `chore: Update dependencies to latest versions`
+- **docs:** for documentation changes<br>
+  _Example:_ `docs: Add commit message guidelines`
+- **style:** for changes that don’t affect logic (formatting, whitespace)<br>
+  Example:\_ `style: Adjust indentation in components`
+- **test:** for adding or updating tests<br>
+  _Example:_ `test: Add unit tests for utils functions`
