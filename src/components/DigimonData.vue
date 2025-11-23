@@ -66,11 +66,12 @@ export default {
   background: #c8d3ea;
   padding: 1.5rem;
   border-radius: 12px;
-  max-width: 30rem;
-  margin: 1rem auto;
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
+  width: 100%;
+  margin: 1rem auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 /*

@@ -22,6 +22,13 @@ html {
   flex-direction: column;
 }
 
+.container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
 /* TABLET */
 @media (min-width: 600px) {
 }

@@ -19,21 +19,23 @@ export default {
     The ".main" class gives it a full-height background behind all child components.
   -->
   <main class="main">
-    <!-- Search input and action buttons -->
-    <SearchBar />
+    <div class="container">
+      <!-- Search input and action buttons -->
+      <SearchBar />
 
-    <!-- Current Digimon visual representation -->
-    <DisplayDigimon />
+      <!-- Current Digimon visual representation -->
+      <DisplayDigimon />
 
-    <!-- Static demonstration of Digimon data (later dynamic) -->
-    <DigimonData
-      name="Allomon"
-      :index="265"
-      level="Adult"
-      attribute="Data"
-      type="Dinosaur"
-      :fields="['Nature Spirits', 'Dragon’s Roar']"
-    />
+      <!-- Static demonstration of Digimon data (later dynamic) -->
+      <DigimonData
+        name="Allomon"
+        :index="265"
+        level="Adult"
+        attribute="Data"
+        type="Dinosaur"
+        :fields="['Nature Spirits', 'Dragon’s Roar']"
+      />
+    </div>
   </main>
 </template>
 
@@ -46,5 +48,6 @@ export default {
 .main {
   flex: 1;
   background: linear-gradient(to bottom, var(--color-1-light), var(--color-1-dark));
+  padding: 1rem;
 }
 </style>

@@ -24,10 +24,8 @@ export default {
   <div class="app">
     <!-- The top header bar, containing the logo and optional UI controls -->
     <HeaderComponent />
-
     <!-- Main content area: search bar, selected Digimon image, and info panel -->
     <MainComponent />
-
     <!-- Footer displayed at the bottom of the page -->
     <FooterComponent />
   </div>

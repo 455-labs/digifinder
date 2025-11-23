@@ -69,24 +69,25 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0.5rem;
+  padding: 1rem 0;
 }
 
 /* Width of the search input field (main search box) */
 .search-input {
-  width: 50rem;
+  width: 100%;
 }
 
 /* Horizontal row for action buttons, with spacing between them */
 .button-row {
   display: flex;
   gap: 1rem;
-  width: 30rem;
+  width: 100%;
 }
 
 /* Ensures both buttons grow equally to fill the row */
 .button-row > * {
   flex: 1;
+  width: 100%;
 }
 
 /*

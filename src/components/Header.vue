@@ -37,7 +37,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1rem;
+  padding: 0.25rem 1rem;
   background-color: var(--color-2-mid);
   border-bottom: 1px solid #000000;
 }

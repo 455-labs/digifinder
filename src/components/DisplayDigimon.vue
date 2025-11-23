@@ -87,12 +87,13 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
   background: var(--color-2-light);
   border-radius: 12px;
-  max-width: 30rem;
-  margin: auto;
-  margin-top: 1rem;
+  margin: 1rem auto;
+  padding: 1.5rem;
+  width: 100%;
+  min-height: 350px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 /*
@@ -105,6 +106,8 @@ export default {
   margin: 1rem;
   object-fit: contain;
   border: 1px solid black;
+  max-width: 65%;
+  height: auto;
 }
 
 /*
