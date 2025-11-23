@@ -21,3 +21,10 @@ export default {
     />
   </main>
 </template>
+
+<style scoped>
+.main {
+  flex: 1;
+  background: linear-gradient(to bottom, var(--color-2-mid), #000000);
+}
+</style>
