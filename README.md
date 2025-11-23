@@ -16,13 +16,15 @@ DigiFinder is a Vue-based frontend application that allows users to search for D
     - [How These Files Work Together](#how-these-files-work-together)
   - [Commit Message Guidelines](#commit-message-guidelines)
     - [General Principles](#general-principles)
-    - [Common Prefixes and Their Usage](#commit-message-guidelines)
+    - [Common Prefixes and Their Usage](#common-prefixes-and-their-usage)
 
 ## To Do
 
-- [ ] Basic structure
+- [X] Basic structure
 - [ ] Search Digimon by name or id
 - [ ] Get random Digimon
+- [ ] Error message when Digimon is not found
+- [ ] Fade in/out animations
 - [ ] Language selection
 - [ ] Dark mode
 - [ ] How to use
