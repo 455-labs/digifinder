@@ -1,58 +1,190 @@
 <script>
-// Simple header component responsible for displaying the application logo
-// and optional UI controls such as language selection or dark mode toggles.
+// ---------------------------------------------------------
+// HeaderComponent.vue
+// ---------------------------------------------------------
+// The main top bar of the application.
+// This component is responsible for displaying:
+//
+// - The application logo (centered)
+// - Left-side tools (Favorites)
+// - Right-side tools (Help, Dark Mode toggle, Language menu)
+//
+// This component currently contains only UI logic and placeholder
+// functions. Real behavior — such as persisting dark mode or
+// localization — will be implemented later.
+//
+// Uses Vue's Composition API for state management.
+// ---------------------------------------------------------
+
+import { ref } from 'vue'
+
 export default {
   name: 'HeaderComponent',
+
+  setup() {
+    // ---------------------------------------------------------
+    // DARK MODE (placeholder)
+    // ---------------------------------------------------------
+    // "darkMode" keeps track of whether the app is currently in dark
+    // or light mode. The actual theme-switching logic is not yet
+    // implemented — at the moment we only log the value.
+    //
+    // Later improvements:
+    // - Store this value in localStorage
+    // - Apply a CSS class to <body>
+    // - Update Vuetify theme dynamically
+    // ---------------------------------------------------------
+    const darkMode = ref(false)
+
+    function toggleDarkMode() {
+      darkMode.value = !darkMode.value
+      console.log("Dark mode toggled:", darkMode.value)
+    }
+
+    // ---------------------------------------------------------
+    // LANGUAGE SELECTION (placeholder)
+    // ---------------------------------------------------------
+    // Stores the currently selected language.
+    // Later:
+    // - Save preference to localStorage
+    // - Integrate real translation system (i18n)
+    // ---------------------------------------------------------
+    const language = ref('fi')
+
+    function setLanguage(lang) {
+      language.value = lang
+      console.log("Language changed:", lang)
+    }
+
+    // ---------------------------------------------------------
+    // FAVORITES SCREEN (placeholder)
+    // ---------------------------------------------------------
+    // In the future this will open a real "Favorites" view or modal.
+    // Right now it only logs the action.
+    // ---------------------------------------------------------
+    function openFavorites() {
+      console.log("Favorites page will open later")
+    }
+
+    // ---------------------------------------------------------
+    // HELP / HOW-TO SCREEN (placeholder)
+    // ---------------------------------------------------------
+    // In the future this will open a modal or a dedicated help page.
+    // ---------------------------------------------------------
+    function openHelp() {
+      console.log("Help / How-To page will open later")
+    }
+
+    // ---------------------------------------------------------
+    // Expose everything to the template
+    // ---------------------------------------------------------
+    return {
+      darkMode,
+      language,
+      toggleDarkMode,
+      setLanguage,
+      openFavorites,
+      openHelp,
+    }
+  },
 }
 </script>
 
 <template>
   <!--
-    The main header element. Uses a horizontal flex layout to position
-    left-side controls, the centered logo, and right-side controls.
+    Header container:
+    Uses a 3-part flex layout:
+      LEFT  |  CENTER (logo)  |  RIGHT
+
+    justify-content: space-between keeps left and right on edges,
+    while .center uses flex:1 to force the logo into perfect center.
   -->
   <header class="app-header">
-    <!-- Placeholder for tools such as language switcher -->
-    <div class="left-slot">
-      <!-- language selection -->
+    <div class="container">
+    <!-- LEFT SIDE BUTTONS (Favorites) -->
+    <!-- Buttons grouped inside a flex container -->
+    <div class="side left">
+      <!-- Help Button -->
+      <v-btn icon @click="openHelp">
+        <v-icon>mdi-help-circle-outline</v-icon>
+      </v-btn>
+
+      <!-- Favorites Button -->
+      <v-btn icon @click="openFavorites">
+        <v-icon>mdi-heart-outline</v-icon>
+      </v-btn>
     </div>
 
-    <!-- Main application logo with decorative ASCII-style text -->
-    <h1 class="logo">DIGIFINDER</h1>
+    <!-- CENTER LOGO -->
+    <!-- This block stretches to ensure the logo remains centered -->
+    <div class="center">
+      <h1 class="logo">DIGIFINDER</h1>
+    </div>
 
-    <!-- Placeholder for additional controls such as dark mode toggle -->
-    <div class="right-slot">
-      <!-- darkModeButton -->
+    <!-- RIGHT SIDE BUTTONS: Help, Dark Mode, Language menu -->
+    <div class="side right">
+      <!-- Dark Mode Toggle -->
+      <v-btn icon @click="toggleDarkMode">
+        <v-icon>
+          {{ darkMode ? "mdi-weather-night" : "mdi-weather-sunny" }}
+        </v-icon>
+      </v-btn>
+
+      <!-- Language Selector Menu -->
+      <v-menu>
+        <template #activator="{ props }">
+          <v-btn icon v-bind="props">
+            <v-icon>mdi-earth</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item @click="setLanguage('fi')">🇫🇮 Finnish</v-list-item>
+          <v-list-item @click="setLanguage('en')">🇬🇧 English</v-list-item>
+        </v-list>
+      </v-menu>
+    </div>
     </div>
   </header>
 </template>
 
 <style scoped>
+/* ---------------------------------------------------------
+   HEADER LAYOUT
+--------------------------------------------------------- */
 /*
-  Header container: sticks to the top and visually separates the
-  application from the rest of the layout. The flex layout centers
-  the logo while reserving space for controls on both sides.
+  Creates a 3-column layout using flexbox:
+  - Left   (buttons)
+  - Center (logo)
+  - Right  (buttons)
+
+  The logo stays centered regardless of how many buttons
+  are added to left or right.
 */
 .app-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.25rem 1rem;
+  padding: 1rem 1rem;
   background-color: var(--color-2-mid);
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid #000;
 }
 
-/*
-  Logo styling: large monospace title with a vertical gradient.
-  The gradient is clipped inside the text, producing a stylized
-  "painted" or "metallic" effect. Flex: 1 keeps it centered.
-*/
+.container {
+  max-width: 100%;
+  display: flex;
+}
+
+/* ---------------------------------------------------------
+   CENTER LOGO STYLE
+--------------------------------------------------------- */
 .logo {
   margin: 0;
   text-align: center;
-  flex: 1;
   font-size: 2rem;
   font-family: Consolas, monospace;
+
+  /* Gradient applied to text */
   background: linear-gradient(to bottom, var(--color-1-light), var(--color-1-dark));
   background-clip: text;
   -webkit-background-clip: text;
@@ -62,15 +194,34 @@ export default {
 }
 
 /*
-  Slots that hold optional interactive components (language selector,
-  dark mode button, etc.). Both sides have equal width to preserve
-  symmetry around the centered logo.
+  The center container stretches and keeps the logo perfectly centered.
 */
-.left-slot,
-.right-slot {
-  width: 50px;
+.center {
+  flex: 1;
   display: flex;
   justify-content: center;
+}
+
+/* ---------------------------------------------------------
+   SIDE BUTTON GROUPS
+--------------------------------------------------------- */
+/*
+  Left and right button containers.
+  Using gap for spacing instead of margin for cleaner layout.
+*/
+.side {
+  width: 120px;
+  display: flex;
   align-items: center;
+  gap: 0.75rem;
+}
+
+/* Optional helpers for clarity */
+.side.left {
+  justify-content: flex-start;
+}
+
+.side.right {
+  justify-content: flex-end;
 }
 </style>
