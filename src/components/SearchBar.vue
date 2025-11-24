@@ -57,8 +57,8 @@ export default {
       Buttons share styling via the "digibtn" class.
     -->
     <div class="button-row">
-      <v-btn class="digibtn" @click="searchDigimon">Search</v-btn>
-      <v-btn class="digibtn" @click="randomDigimon">Random</v-btn>
+      <v-btn class="digibtn" variant="flat" @click="searchDigimon">Search</v-btn>
+      <v-btn class="digibtn" variant="flat" @click="randomDigimon">Random</v-btn>
     </div>
   </div>
 </template>
@@ -98,8 +98,8 @@ export default {
   Uses application theme colors defined in CSS variables.
 */
 .digibtn {
-  background-color: var(--color-1-dark) !important;
-  color: black !important;
+  background-color: var(--bg-gradient-bottom) !important;
+  color: var(--text-primary) !important;
   font-weight: 600;
   letter-spacing: 0.5px;
   border-radius: 8px;
@@ -108,17 +108,16 @@ export default {
 
 /* Hover effect: lighter highlight */
 .digibtn:hover {
-  background-color: var(--color-2-light) !important;
-  cursor: pointer;
+  background-color: var(--surface-card) !important;
 }
 
 /* Active state: uses mid tone color for feedback */
 .digibtn:active {
-  background-color: var(--color-2-mid) !important;
+  background-color: var(--header-bg) !important;
 }
 
 /* Customizes Vuetify's ripple effect color */
 .digibtn .v-ripple__animation {
-  background-color: var(--color-2-mid) !important;
+  background-color: var(--header-bg) !important;
 }
 </style>

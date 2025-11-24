@@ -61,7 +61,7 @@ export default {
   - Narrow max width to maintain compact info layout
 */
 .data-card {
-  background: #c8d3ea;
+  background: var(--surface-card);
   padding: 1.5rem;
   border-radius: 12px;
   display: flex;
@@ -70,6 +70,7 @@ export default {
   width: 100%;
   margin: 1rem auto;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  color: var(--text-primary)
 }
 
 /*
@@ -83,8 +84,7 @@ export default {
   font-family: Consolas, monospace;
   font-size: 1.8rem;
   text-align: center;
-  color: var(--color-2-dark);
-  text-shadow: 1px 1px 2px #ccc;
+  color: var(--text-heading);
 }
 
 /*

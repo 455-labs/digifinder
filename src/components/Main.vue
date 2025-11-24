@@ -189,7 +189,7 @@ export default {
 */
 .main {
   flex: 1;
-  background: linear-gradient(to bottom, var(--color-1-light), var(--color-1-dark));
+  background: linear-gradient(to bottom, var(--bg-gradient-top), var(--bg-gradient-bottom));
   padding: 1rem;
 }
 </style>

@@ -63,7 +63,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--color-2-light);
+  background: var(--surface-card);
   border-radius: 12px;
   margin: 1rem auto;
   padding: 1.5rem;
@@ -88,13 +88,8 @@ export default {
 }
 
 .circle-btn {
-  background-color: var(--color-1-dark) !important;
+  background-color: var(--bg-gradient-bottom) !important;
   color: white !important;
   border-radius: 50%;
-}
-
-/* Customizes Vuetify's ripple effect color */
-.circle-btn .v-ripple__animation {
-  --v-ripple-overlay-color: var(--color-2-mid);
 }
 </style>

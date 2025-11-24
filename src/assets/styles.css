@@ -1,13 +1,54 @@
 :root {
-  --color-1-light: #ffff8d;
-  --color-1-dark: #ff9a13;
-  --color-2-light: #c8d3ea;
-  --color-2-mid: #2575ae;
-  --color-2-dark: #034a7c;
+  /* ------------------------------
+     Page Background Gradient
+     ------------------------------ */
+  --bg-gradient-top: #ffff8d;
+  --bg-gradient-bottom: #ff9a13;
+
+  /* ------------------------------
+     Card / Content Background
+     ------------------------------ */
+  --surface-card: #c8d3ea;
+
+  /* ------------------------------
+     Header Bar Colors
+     ------------------------------ */
+  --header-bg: #2575ae;
+  --header-bg-dark: #034a7c;
+
+  /* ------------------------------
+     Text Colors
+     ------------------------------ */
+  --text-primary: #000000;
+  --text-heading: #034a7c;
 }
 
-.dark {
-  --color-1-light: #ffff8d;
+/* --------------------------------
+   DARK MODE THEME
+   -------------------------------- */
+[data-theme="dark"] {
+  /* ------------------------------
+     Page Background Gradient (Dark)
+     ------------------------------ */
+  --bg-gradient-top: #1a1d21;
+  --bg-gradient-bottom: #2b2f33;
+
+  /* ------------------------------
+     Card / Content Background (Dark)
+     ------------------------------ */
+  --surface-card: #2f3a45;
+
+  /* ------------------------------
+     Header Bar Colors (Dark)
+     ------------------------------ */
+  --header-bg: #0f3a56;
+  --header-bg-dark: #082536;
+
+  /* ------------------------------
+     Text Colors (Dark)
+     ------------------------------ */
+  --text-primary: #e6e6e6;
+  --text-heading: #90c4ff;
 }
 
 body,

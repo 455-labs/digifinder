@@ -166,7 +166,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding: 1rem 1rem;
-  background-color: var(--color-2-mid);
+  background-color: var(--header-bg);
   border-bottom: 1px solid #000;
 }
 
@@ -185,12 +185,12 @@ export default {
   font-family: Consolas, monospace;
 
   /* Gradient applied to text */
-  background: linear-gradient(to bottom, var(--color-1-light), var(--color-1-dark));
+  background: linear-gradient(to bottom, var(--bg-gradient-top), var(--bg-gradient-bottom));
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 2px var(--color-2-dark);
+  -webkit-text-stroke: 2px var(--header-bg-dark);
 }
 
 /*

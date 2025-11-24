@@ -27,8 +27,9 @@ export default {
   align-items: center;
   justify-content: center;
   padding: 0.5rem 0.5rem;
-  background-color: var(--color-2-mid);
+  background-color: var(--header-bg);
   border-top: 1px solid #000000;
   font-family: Consolas, monospace;
+  color: var(--text-primary);
 }
 </style>
