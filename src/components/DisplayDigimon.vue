@@ -5,67 +5,53 @@
 export default {
   name: 'DisplayDigimon',
 
+  // Events emitted to the parent component
+  emits: ['prev', 'next'],
+
   props: {
-    // (Optional) Image source passed from a parent component.
-    // Currently not used in the template, but included for future extensibility.
+    // Image URL passed from the parent component
     img: String,
   },
 
   data() {
     return {
       // Tracks whether the displayed Digimon is marked as a favorite.
-      // This is purely local state for now and can later be emitted to the parent.
+      // This is local state (for now).
       isFavorite: false,
     }
   },
 
   methods: {
-    // Toggles the favorite state.
-    // Future expansion: emit an event to inform the parent about the change.
+    // Toggles the favorite icon state
     toggleFavorite() {
       this.isFavorite = !this.isFavorite
-      // this.$emit("saveFavorite", this.isFavorite)
     },
   },
 }
 </script>
 
 <template>
-  <!--
-    Main card containing the Digimon image and the action buttons.
-    The styling and layout are handled in the scoped CSS.
-  -->
+  <!-- Main Digimon display card -->
   <div class="digimon-card">
-    <!--
-      Digimon image display.
-      Currently uses a static test image; in the future, this can be replaced
-      with the "img" prop once the API integration is complete.
-    -->
+    <!-- Digimon image -->
     <img :src="img" alt="Digimon image" class="digimon-img" />
 
-    <!--
-      Vertical stack of interactive buttons:
-      - Favorite toggle
-      - Previous Digimon
-      - Next Digimon
-      The navigation buttons currently have no logic attached.
-    -->
+    <!-- Button column (favorite, previous, next) -->
     <div class="button-column">
-      <!-- Favorite toggle button.
-           Color and icon change based on isFavorite state. -->
+      <!-- Favorite toggle -->
       <v-btn icon :color="isFavorite ? 'red' : 'grey'" @click="toggleFavorite">
         <v-icon>
           {{ isFavorite ? 'mdi-heart' : 'mdi-heart-outline' }}
         </v-icon>
       </v-btn>
 
-      <!-- Previous Digimon button (placeholder) -->
-      <v-btn icon class="circle-btn">
+      <!-- Previous Digimon button -->
+      <v-btn icon class="circle-btn" @click="$emit('prev')">
         <v-icon>mdi-chevron-left</v-icon>
       </v-btn>
 
-      <!-- Next Digimon button (placeholder) -->
-      <v-btn icon class="circle-btn">
+      <!-- Next Digimon button -->
+      <v-btn icon class="circle-btn" @click="$emit('next')">
         <v-icon>mdi-chevron-right</v-icon>
       </v-btn>
     </div>
@@ -73,12 +59,6 @@ export default {
 </template>
 
 <style scoped>
-/*
-  Card container that holds the Digimon image and action buttons.
-  - Light background based on theme variables
-  - Rounded corners for a modern card design
-  - Centered horizontally with a fixed maximum width
-*/
 .digimon-card {
   display: flex;
   align-items: center;
@@ -92,12 +72,6 @@ export default {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
-/*
-  Digimon image styling:
-  - Contained scaling to prevent distortion
-  - Small border for definition
-  - Margin for spacing inside the card
-*/
 .digimon-img {
   margin: 1rem;
   object-fit: contain;
@@ -106,11 +80,6 @@ export default {
   height: auto;
 }
 
-/*
-  Column layout for the action buttons.
-  - Vertical stacking
-  - Even spacing between buttons
-*/
 .button-column {
   display: flex;
   flex-direction: column;
@@ -118,13 +87,14 @@ export default {
   gap: 1rem;
 }
 
-/*
-  Simple circular button style for navigation controls.
-  Uses the app’s theme color for consistency.
-*/
 .circle-btn {
   background-color: var(--color-1-dark) !important;
   color: white !important;
   border-radius: 50%;
+}
+
+/* Customizes Vuetify's ripple effect color */
+.circle-btn .v-ripple__animation {
+  --v-ripple-overlay-color: var(--color-2-mid);
 }
 </style>

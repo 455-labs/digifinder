@@ -34,22 +34,19 @@ export default {
     // Reactive State
     // -----------------------------------------------------------
 
-    // Stores the currently displayed Digimon.
-    // Starts as "null" and is filled once the user searches
-    // or when a random Digimon is loaded on page startup.
+    // Currently visible Digimon object (full API response).
     const activeDigimon = ref(null)
 
-    // These values will hold the smallest and largest Digimon IDs
-    // available from the API (needed for random selection).
+    // Minimum and maximum Digimon IDs available from the API.
+    // Used for random selection and next/previous navigation.
     const minId = ref(null)
     const maxId = ref(null)
 
     // -----------------------------------------------------------
     // Load Digimon ID Boundaries (min/max)
     // -----------------------------------------------------------
-    // This function fetches all Digimon from the API and determines
-    // the lowest and highest Digimon ID numbers available.
-    // These values are required for random Digimon functionality.
+    // Fetches the full Digimon list using a high pageSize, then
+    // determines the smallest and largest available ID numbers.
     async function loadBounds() {
       const bounds = await fetchDigimonBounds()
       minId.value = bounds.min
@@ -57,11 +54,21 @@ export default {
     }
 
     // -----------------------------------------------------------
+    // Wrapper: Load Digimon by ID
+    // -----------------------------------------------------------
+    // This helper function centralizes Digimon loading by ID.
+    // It updates activeDigimon and ensures all navigation logic
+    // (previous, next, random) uses the same code.
+    async function loadDigimonById(id) {
+      const data = await fetchDigimon(id)
+      activeDigimon.value = data
+    }
+
+    // -----------------------------------------------------------
     // Handle Search Input
     // -----------------------------------------------------------
-    // This function runs when SearchBar emits a "search" event.
-    // The "query" is the user input (name or ID).
-    // If found, the Digimon is stored in activeDigimon.
+    // Triggered when the SearchBar emits "search" with user input.
+    // Accepts both names and IDs because the API supports both.
     async function onSearch(query) {
       if (!query) return
 
@@ -76,37 +83,64 @@ export default {
     // -----------------------------------------------------------
     // Fetch a Random Digimon
     // -----------------------------------------------------------
-    // Uses the preloaded min and max Digimon IDs to pick a random one.
-    // Once selected, the data is fetched from the API and displayed.
+    // Uses the ID range [minId, maxId] to pick a random Digimon.
     async function fetchRandomDigimon() {
       if (minId.value === null || maxId.value === null) return
 
-      // Pick a random integer between [minId, maxId]
       const randomId = Math.floor(Math.random() * (maxId.value - minId.value + 1)) + minId.value
 
-      const data = await fetchDigimon(randomId)
-      activeDigimon.value = data
+      await loadDigimonById(randomId)
     }
 
     // -----------------------------------------------------------
-    // Auto-run when page loads
+    // Navigate to the next Digimon by ID
     // -----------------------------------------------------------
-    // onMounted() runs only once, after the component is fully loaded.
-    // Here we:
-    // 1) Load the min/max Digimon ID boundaries
-    // 2) Immediately fetch a random Digimon
+    // If we go beyond maxId → wrap to minId.
+    function showNextDigimon() {
+      if (!activeDigimon.value) return
+
+      let nextId = activeDigimon.value.id + 1
+      if (nextId > maxId.value) {
+        nextId = minId.value // wrap-around
+      }
+
+      loadDigimonById(nextId)
+    }
+
+    // -----------------------------------------------------------
+    // Navigate to the previous Digimon by ID
+    // -----------------------------------------------------------
+    // If we go below minId → wrap to maxId.
+    function showPreviousDigimon() {
+      if (!activeDigimon.value) return
+
+      let prevId = activeDigimon.value.id - 1
+      if (prevId < minId.value) {
+        prevId = maxId.value // wrap-around
+      }
+
+      loadDigimonById(prevId)
+    }
+
+    // -----------------------------------------------------------
+    // Auto-run on page load
+    // -----------------------------------------------------------
+    // Fetch the ID boundaries first, then immediately load
+    // a random Digimon so the screen never starts empty.
     onMounted(async () => {
       await loadBounds()
       await fetchRandomDigimon()
     })
 
     // -----------------------------------------------------------
-    // Expose the data and functions to the template
+    // Exposed values to the template
     // -----------------------------------------------------------
     return {
       activeDigimon,
       onSearch,
       fetchRandomDigimon,
+      showNextDigimon,
+      showPreviousDigimon,
     }
   },
 }
@@ -127,7 +161,11 @@ export default {
       <SearchBar @search="onSearch" @random="fetchRandomDigimon" />
 
       <!-- Digimon image card -->
-      <DisplayDigimon :img="activeDigimon?.images?.[0]?.href" />
+      <DisplayDigimon
+        :img="activeDigimon?.images?.[0]?.href"
+        @prev="showPreviousDigimon"
+        @next="showNextDigimon"
+      />
 
       <!-- Detailed data card for the current Digimon -->
       <DigimonData
