@@ -16,6 +16,7 @@ export default {
     // For now, logs the query but can later be connected to an API call
     searchDigimon() {
       console.log('Searching:', this.query)
+      this.$emit('search', this.query)
     },
 
     // Random Digimon selection button.

@@ -41,11 +41,7 @@ export default {
       Currently uses a static test image; in the future, this can be replaced
       with the "img" prop once the API integration is complete.
     -->
-    <img
-      src="https://digi-api.com/images/digimon/w/Allomon.png"
-      alt="Digimon image"
-      class="digimon-img"
-    />
+    <img :src="img" alt="Digimon image" class="digimon-img" />
 
     <!--
       Vertical stack of interactive buttons:

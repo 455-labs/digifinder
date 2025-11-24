@@ -32,25 +32,23 @@ export default {
 
     <!-- Each row shows a label on the left and a value on the right -->
     <div class="data-row">
-      <strong>Index:</strong> <span>{{ index }}</span>
+      <strong>Level:</strong>
+      <span>{{ level }}</span>
     </div>
 
     <div class="data-row">
-      <strong>Level:</strong> <span>{{ level }}</span>
+      <strong>Attribute:</strong>
+      <span>{{ attribute }}</span>
     </div>
 
     <div class="data-row">
-      <strong>Attribute:</strong> <span>{{ attribute }}</span>
-    </div>
-
-    <div class="data-row">
-      <strong>Type:</strong> <span>{{ type }}</span>
+      <strong>Type:</strong>
+      <span>{{ type }}</span>
     </div>
 
     <div class="data-row">
       <strong>Fields:</strong>
-      <!-- Safely joins the fields array into a human-readable list -->
-      <span>{{ fields?.join(', ') }}</span>
+      <span>{{ fields?.map((f) => f.field).join(', ') }}</span>
     </div>
   </div>
 </template>
