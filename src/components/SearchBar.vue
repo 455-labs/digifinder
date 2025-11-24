@@ -1,6 +1,8 @@
 <script>
-// SearchBar component: handles user input for searching Digimon
-// and triggers simple actions (search or random selection).
+// SearchBar component: handles user-provided search queries
+// and emits events upward for the parent to handle.
+// This component does NOT communicate with the API directly —
+// it only collects user actions and passes them upward.
 export default {
   name: 'SearchBar',
 
@@ -20,9 +22,9 @@ export default {
     },
 
     // Random Digimon selection button.
-    // Placeholder for future logic (e.g., fetch a random Digimon)
+    // Emit a random request upward
     randomDigimon() {
-      console.log('Random!')
+      this.$emit('random')
     },
   },
 }
@@ -106,7 +108,7 @@ export default {
 
 /* Hover effect: lighter highlight */
 .digibtn:hover {
-  background-color: var(--color-1-light) !important;
+  background-color: var(--color-2-light) !important;
   cursor: pointer;
 }
 

@@ -1,47 +1,70 @@
 <script>
-// Importing the core UI components used inside the main section.
-// Each component handles a separate responsibility:
-// - SearchBar: accepts user input (search term or random action)
-// - DisplayDigimon: shows the selected Digimon's image
-// - DigimonData: displays detailed Digimon information
+// -------------------------------------------------------------
+// Main.vue
+// -------------------------------------------------------------
+// This component acts as the central controller of the app.
+// It connects the SearchBar, DisplayDigimon, and DigimonData
+// components together and manages all Digimon fetching logic.
+//
+// Responsibilities:
+// - Listen to search and random events from SearchBar
+// - Fetch Digimon data from DigiAPI
+// - Store the currently active Digimon in reactive state
+// - Load min/max Digimon ID range from the API
+// - Automatically fetch a random Digimon on page load
+// -------------------------------------------------------------
+
 import SearchBar from './SearchBar.vue'
 import DisplayDigimon from './DisplayDigimon.vue'
 import DigimonData from './DigimonData.vue'
 
-// "ref" is imported from Vue's Composition API.
-// A ref() creates a reactive value — when it changes, the UI updates automatically.
-import { ref } from 'vue'
+// Vue Composition API tools:
+// - ref(): creates reactive state values
+// - onMounted(): runs code when the component is first loaded
+import { ref, onMounted } from 'vue'
 
-// Reusable API function that fetches Digimon data from DigiAPI.
-import { fetchDigimon } from '@/api/digimonApi.js'
+// API helper functions (located in /src/api/digimonApi.js)
+import { fetchDigimon, fetchDigimonBounds } from '@/api/digimonApi.js'
 
 export default {
   components: { SearchBar, DigimonData, DisplayDigimon },
 
-  // The setup() function is part of Vue 3's Composition API.
-  // Everything returned from setup() becomes available in the <template>.
   setup() {
-    // ----------------------------------------------
-    // activeDigimon:
-    // ----------------------------------------------
-    // A reactive variable storing the currently displayed Digimon.
-    // Vue's "ref(null)" means:
-    //   - The initial value is null (nothing selected yet)
-    //   - When we later assign a value (activeDigimon.value = ...),
-    //     the UI updates automatically.
+    // -----------------------------------------------------------
+    // Reactive State
+    // -----------------------------------------------------------
+
+    // Stores the currently displayed Digimon.
+    // Starts as "null" and is filled once the user searches
+    // or when a random Digimon is loaded on page startup.
     const activeDigimon = ref(null)
 
-    // ----------------------------------------------
-    // onSearch():
-    // ----------------------------------------------
-    // Called when the SearchBar emits a "search" event.
-    // The event passes the search term entered by the user.
-    //
-    // The "@" symbol in <SearchBar @search="onSearch" />
-    // means: "Listen to the 'search' event and call onSearch()".
-    //
-    // The received query is then used to call the API.
+    // These values will hold the smallest and largest Digimon IDs
+    // available from the API (needed for random selection).
+    const minId = ref(null)
+    const maxId = ref(null)
+
+    // -----------------------------------------------------------
+    // Load Digimon ID Boundaries (min/max)
+    // -----------------------------------------------------------
+    // This function fetches all Digimon from the API and determines
+    // the lowest and highest Digimon ID numbers available.
+    // These values are required for random Digimon functionality.
+    async function loadBounds() {
+      const bounds = await fetchDigimonBounds()
+      minId.value = bounds.min
+      maxId.value = bounds.max
+    }
+
+    // -----------------------------------------------------------
+    // Handle Search Input
+    // -----------------------------------------------------------
+    // This function runs when SearchBar emits a "search" event.
+    // The "query" is the user input (name or ID).
+    // If found, the Digimon is stored in activeDigimon.
     async function onSearch(query) {
+      if (!query) return
+
       try {
         const data = await fetchDigimon(query)
         activeDigimon.value = data
@@ -50,10 +73,40 @@ export default {
       }
     }
 
-    // Everything returned from setup() is exposed to the template.
+    // -----------------------------------------------------------
+    // Fetch a Random Digimon
+    // -----------------------------------------------------------
+    // Uses the preloaded min and max Digimon IDs to pick a random one.
+    // Once selected, the data is fetched from the API and displayed.
+    async function fetchRandomDigimon() {
+      if (minId.value === null || maxId.value === null) return
+
+      // Pick a random integer between [minId, maxId]
+      const randomId = Math.floor(Math.random() * (maxId.value - minId.value + 1)) + minId.value
+
+      const data = await fetchDigimon(randomId)
+      activeDigimon.value = data
+    }
+
+    // -----------------------------------------------------------
+    // Auto-run when page loads
+    // -----------------------------------------------------------
+    // onMounted() runs only once, after the component is fully loaded.
+    // Here we:
+    // 1) Load the min/max Digimon ID boundaries
+    // 2) Immediately fetch a random Digimon
+    onMounted(async () => {
+      await loadBounds()
+      await fetchRandomDigimon()
+    })
+
+    // -----------------------------------------------------------
+    // Expose the data and functions to the template
+    // -----------------------------------------------------------
     return {
       activeDigimon,
-      onSearch, // Must be returned so @search can call it
+      onSearch,
+      fetchRandomDigimon,
     }
   },
 }
@@ -61,31 +114,22 @@ export default {
 
 <template>
   <!--
-    Main content area of the app.
-    The <main> element spans the full vertical space.
-    All actual visible content is inside the "container", which
-    gives us consistent layout width across all screen sizes.
+    Main visual area of the application.
+    The ".container" keeps everything centered and responsive.
   -->
   <main class="main">
     <div class="container">
       <!--
-        The SearchBar component emits a "search" event.
-        The @search syntax means we are listening for that event.
-        When triggered, onSearch(query) is executed.
+        SearchBar emits:
+        - @search="onSearch"  → to search Digimon by user input
+        - @random="fetchRandomDigimon" → to load a random Digimon
       -->
-      <SearchBar @search="onSearch" />
+      <SearchBar @search="onSearch" @random="fetchRandomDigimon" />
 
-      <!--
-        Displays the Digimon image.
-        The ":" symbol before "img" means "bind this value reactively".
-        We use optional chaining (?.) to avoid errors when activeDigimon is null.
-      -->
+      <!-- Digimon image card -->
       <DisplayDigimon :img="activeDigimon?.images?.[0]?.href" />
 
-      <!--
-        Pass Digimon details to the DigimonData component.
-        All fields use ":" to bind reactive values.
-      -->
+      <!-- Detailed data card for the current Digimon -->
       <DigimonData
         :name="activeDigimon?.name"
         :index="activeDigimon?.id"
@@ -100,8 +144,10 @@ export default {
 
 <style scoped>
 /*
-  Full-height main area with a vertical gradient background.
-  The padding ensures that inner content does not touch the screen edges.
+  Main layout area:
+  - fills available space
+  - has a gradient background based on theme variables
+  - padding ensures spacing inside the container
 */
 .main {
   flex: 1;
