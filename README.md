@@ -20,9 +20,9 @@ DigiFinder is a Vue-based frontend application that allows users to search for D
 
 ## To Do
 
-- [X] Basic structure
-- [ ] Search Digimon by name or id
-- [ ] Get random Digimon
+- [x] Basic structure
+- [x] Search Digimon by name or id
+- [x] Get random Digimon
 - [ ] Error message when Digimon is not found
 - [ ] Fade in/out animations
 - [ ] Language selection
