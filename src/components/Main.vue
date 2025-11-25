@@ -180,6 +180,7 @@ export default {
       <!-- Digimon image card -->
       <DisplayDigimon
         :img="activeDigimon?.images?.[0]?.href"
+        :id="activeDigimon?.id"
         @prev="showPreviousDigimon"
         @next="showNextDigimon"
       />
