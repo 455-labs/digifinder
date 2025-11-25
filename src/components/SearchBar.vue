@@ -50,6 +50,7 @@ export default {
       clearable
       prepend-inner-icon="mdi-magnify"
       class="search-input"
+      @keyup.enter="searchDigimon"
     />
 
     <!--
