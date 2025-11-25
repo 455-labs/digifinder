@@ -42,6 +42,7 @@ export default {
       - built-in clear button
       - search icon
       - "solo" variant for a cleaner look
+      - "enter" key to search
     -->
     <v-text-field
       v-model="query"
