@@ -31,6 +31,7 @@ DigiFinder is a Vue-based frontend application that allows users to search for D
 - [ ] Save and delete favorites
   - [ ] Lazy load favorites list
 - [ ] Mobile first
+- [x] Tooltips
 
 ## Project Structure Overview
 
