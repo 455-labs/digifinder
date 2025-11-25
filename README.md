@@ -26,7 +26,7 @@ DigiFinder is a Vue-based frontend application that allows users to search for D
 - [ ] Error message when Digimon is not found
 - [ ] Fade in/out animations
 - [ ] Language selection
-- [ ] Dark mode
+- [x] Dark mode
 - [ ] How to use
 - [ ] Save and delete favorites
   - [ ] Lazy load favorites list
