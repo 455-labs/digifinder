@@ -5,30 +5,62 @@
 export default {
   name: 'DisplayDigimon',
 
-  // Events emitted to the parent component
+  // Events emitted to the parent
   emits: ['prev', 'next'],
 
+  // Image URL, id Number passed from the parent component
   props: {
-    // Image URL passed from the parent component
     img: String,
+    id: Number,
   },
 
   data() {
     return {
-      // Tracks whether the displayed Digimon is marked as a favorite.
-      // This is local state (for now).
-      isFavorite: false,
+      // Array containing favorite digimons as array
+      favoriteDigimons: [],
+    }
+  },
+
+  created() {
+    // Loads favorites from local storage
+    const saved = localStorage.getItem("favoriteDigimons")
+    if (saved) {
+      this.favoriteDigimons = JSON.parse(saved)
     }
   },
 
   methods: {
     // Toggles the favorite icon state
     toggleFavorite() {
-      this.isFavorite = !this.isFavorite
+      if (this.favoriteDigimons.includes(this.id)) {
+        // Removes digimon from favourise
+        this.favoriteDigimons = this.favoriteDigimons.filter(
+          digimonId => digimonId !== this.id
+        )
+        console.log("Removed from favorites!")
+      } else {
+        // Adds digimon to favourites
+        this.favoriteDigimons.push(this.id)
+        console.log("Added to favorites!")
+      }
+
+      // Updates local storage
+      localStorage.setItem(
+        "favoriteDigimons",
+        JSON.stringify(this.favoriteDigimons)
+      )
     },
   },
+
+  computed: {
+    // Computed property checks always if digimon is in favorites
+    isFavorite() {
+      return this.favoriteDigimons.includes(this.id)
+    }
+  }
 }
 </script>
+
 
 <template>
   <!-- Main Digimon display card -->

@@ -5,28 +5,54 @@ import HeaderComponent from './components/Header.vue'
 import MainComponent from './components/Main.vue'
 import FooterComponent from './components/Footer.vue'
 
+import { ref } from 'vue'
+
 export default {
-  // Registering the imported components so they can be used in the template.
   components: {
     HeaderComponent,
     MainComponent,
     FooterComponent,
   },
+
+  setup() {
+    // Shared state for the Help modal
+    const howToDialog = ref(false)
+
+    // Expose to children via provide/inject OR event listeners
+    return { howToDialog }
+  },
 }
 </script>
 
 <template>
-  <!--
-    Root container for the entire application.
-    The global ".app" class defines the layout as a vertical flexbox
-    that stretches from top to bottom of the viewport.
-  -->
   <div class="app">
-    <!-- The top header bar, containing the logo and optional UI controls -->
-    <HeaderComponent />
-    <!-- Main content area: search bar, selected Digimon image, and info panel -->
+    <!-- Header triggers opening the dialog -->
+    <HeaderComponent @open-help="howToDialog = true" />
+
+    <!-- Main content area -->
     <MainComponent />
-    <!-- Footer displayed at the bottom of the page -->
+
+    <!-- Footer -->
     <FooterComponent />
+
+    <!-- How to dialog -->
+    <v-dialog v-model="howToDialog" max-width="500">
+      <v-card>
+        <v-card-title class="d-flex justify-space-between align-center">
+          How to Use DigiFinder
+        </v-card-title>
+
+        <v-card-text>
+          <p>🔍 <strong>Search Digimon:</strong> Write a Digimon name or ID and press Search.</p>
+          <p>🎲 <strong>Random:</strong> Press Random to get a random Digimon.</p>
+          <p>⬅️➡️ <strong>Navigate:</strong> Use arrows to move between Digimon.</p>
+          <p>❤️ <strong>Favorites:</strong> Tap the heart to save a Digimon.</p>
+        </v-card-text>
+
+        <v-card-actions>
+          <v-btn color="primary" block @click="howToDialog = false"> Close </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
