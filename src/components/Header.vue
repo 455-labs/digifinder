@@ -16,7 +16,7 @@
 // Uses Vue's Composition API for state management.
 // ---------------------------------------------------------
 
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 export default {
   name: 'HeaderComponent',
@@ -39,7 +39,23 @@ export default {
     function toggleDarkMode() {
       darkMode.value = !darkMode.value
       console.log("Dark mode toggled:", darkMode.value)
+
+      const newTheme = darkMode.value ? "dark" : "light"
+      document.documentElement.setAttribute("data-theme", newTheme)
+      localStorage.setItem("darkMode", newTheme)
     }
+
+    onMounted(() => {
+      const saved = localStorage.getItem("darkMode")
+
+      if (saved === "dark") {
+        darkMode.value = true
+        document.documentElement.setAttribute("data-theme", "dark")
+      } else {
+        darkMode.value = false
+        document.documentElement.setAttribute("data-theme", "light")
+      }
+    })
 
     // ---------------------------------------------------------
     // LANGUAGE SELECTION (placeholder)
