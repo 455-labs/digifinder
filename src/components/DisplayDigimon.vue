@@ -38,22 +38,43 @@ export default {
 
     <!-- Button column (favorite, previous, next) -->
     <div class="button-column">
-      <!-- Favorite toggle -->
-      <v-btn icon :color="isFavorite ? 'red' : 'grey'" @click="toggleFavorite">
-        <v-icon>
-          {{ isFavorite ? 'mdi-heart' : 'mdi-heart-outline' }}
-        </v-icon>
-      </v-btn>
 
-      <!-- Previous Digimon button -->
-      <v-btn icon class="circle-btn" @click="$emit('prev')">
-        <v-icon>mdi-chevron-left</v-icon>
-      </v-btn>
+      <!-- Favorite toggle with tooltip -->
+      <v-tooltip open-on-hover bottom>
+        <template #activator="{ props }">
+          <v-btn
+            icon
+            :color="isFavorite ? 'red' : 'grey'"
+            @click="toggleFavorite"
+            v-bind="props"
+            :title="isFavorite ? 'Unlike' : 'Like'"
+            :aria-pressed="isFavorite"
+          >
+            <v-icon>{{ isFavorite ? 'mdi-heart' : 'mdi-heart-outline' }}</v-icon>
+          </v-btn>
+        </template>
+        <span>{{ isFavorite ? 'Unlike' : 'Like' }}</span>
+      </v-tooltip>
 
-      <!-- Next Digimon button -->
-      <v-btn icon class="circle-btn" @click="$emit('next')">
-        <v-icon>mdi-chevron-right</v-icon>
-      </v-btn>
+      <!-- Previous Digimon button with tooltip -->
+      <v-tooltip open-on-hover bottom>
+        <template #activator="{ props }">
+          <v-btn icon class="circle-btn" @click="$emit('prev')" v-bind="props" title="Previous">
+            <v-icon>mdi-chevron-left</v-icon>
+          </v-btn>
+        </template>
+        <span>Previous</span>
+      </v-tooltip>
+
+      <!-- Next Digimon button with tooltip -->
+      <v-tooltip open-on-hover bottom>
+        <template #activator="{ props }">
+          <v-btn icon class="circle-btn" @click="$emit('next')" v-bind="props" title="Next">
+            <v-icon>mdi-chevron-right</v-icon>
+          </v-btn>
+        </template>
+        <span>Next</span>
+      </v-tooltip>
     </div>
   </div>
 </template>

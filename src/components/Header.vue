@@ -120,15 +120,26 @@ export default {
     <!-- LEFT SIDE BUTTONS (Favorites) -->
     <!-- Buttons grouped inside a flex container -->
     <div class="side left">
-      <!-- Help Button -->
-      <v-btn icon @click="openHelp">
-        <v-icon>mdi-help-circle-outline</v-icon>
-      </v-btn>
 
-      <!-- Favorites Button -->
-      <v-btn icon @click="openFavorites">
-        <v-icon>mdi-heart-outline</v-icon>
-      </v-btn>
+              <!-- Help Button with Tooltip -->
+        <v-tooltip bottom>
+          <template #activator="{ props }">
+            <v-btn icon v-bind="props" @click="openHelp">
+              <v-icon>mdi-help-circle-outline</v-icon>
+            </v-btn>
+          </template>
+        <span>Help</span>
+      </v-tooltip>
+
+      <!-- Favorites Button with Tooltip -->
+      <v-tooltip bottom>
+        <template #activator="{ props }">
+          <v-btn icon v-bind="props" @click="openFavorites">
+            <v-icon>mdi-heart-outline</v-icon>
+          </v-btn>
+        </template>
+      <span>Favorites</span>
+      </v-tooltip>
     </div>
 
     <!-- CENTER LOGO -->
@@ -139,26 +150,40 @@ export default {
 
     <!-- RIGHT SIDE BUTTONS: Help, Dark Mode, Language menu -->
     <div class="side right">
-      <!-- Dark Mode Toggle -->
-      <v-btn icon @click="toggleDarkMode">
-        <v-icon>
-          {{ darkMode ? "mdi-weather-night" : "mdi-weather-sunny" }}
-        </v-icon>
-      </v-btn>
-
-      <!-- Language Selector Menu -->
-      <v-menu>
+            <!-- Dark Mode Toggle with Tooltip -->
+      <v-tooltip bottom>
         <template #activator="{ props }">
-          <v-btn icon v-bind="props">
-            <v-icon>mdi-earth</v-icon>
+          <v-btn icon v-bind="props" @click="toggleDarkMode">
+            <v-icon>
+              {{ darkMode ? "mdi-weather-night" : "mdi-weather-sunny" }}
+            </v-icon>
           </v-btn>
         </template>
+        <span>{{ darkMode ? "Switch to Light Mode" : "Switch to Dark Mode" }}</span>
+      </v-tooltip>
+      <!-- Language Button with Tooltip + Click Menu -->
+      <v-menu>
+        <template #activator="{ props: menuProps }">
+          <v-tooltip text="Change language" bottom>
+            <template #activator="{ props: tooltipProps }">
 
-        <v-list>
-          <v-list-item @click="setLanguage('fi')">🇫🇮 Finnish</v-list-item>
-          <v-list-item @click="setLanguage('en')">🇬🇧 English</v-list-item>
-        </v-list>
+            <!-- Merge both activators: tooltip AND menu -->
+            <v-btn
+              icon
+              v-bind="{ ...tooltipProps, ...menuProps }"
+        >
+              <v-icon>mdi-earth</v-icon>
+            </v-btn>
+          </template>
+        </v-tooltip>
+      </template>
+
+      <v-list>
+        <v-list-item @click="setLanguage('fi')">🇫🇮 Finnish</v-list-item>
+        <v-list-item @click="setLanguage('en')">🇬🇧 English</v-list-item>
+      </v-list>
       </v-menu>
+
     </div>
     </div>
   </header>
