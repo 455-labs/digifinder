@@ -42,6 +42,33 @@ export default {
     const minId = ref(null)
     const maxId = ref(null)
 
+    // Shared function that loads Digimon and preloads image
+    async function loadDigimonWithPreload(idOrQuery) {
+      try {
+        const data = await fetchDigimon(idOrQuery)
+
+        const imgUrl = data.images?.[0]?.href
+
+        // If Digimon has no image → set immediately
+        if (!imgUrl) {
+          activeDigimon.value = data
+          return
+        }
+
+        // Preload image BEFORE showing data
+        await new Promise((resolve) => {
+          const img = new Image()
+          img.onload = resolve
+          img.src = imgUrl
+        })
+
+        // Show only when image is ready
+        activeDigimon.value = data
+      } catch (err) {
+        console.error('Digimon not found:', idOrQuery)
+      }
+    }
+
     // -----------------------------------------------------------
     // Load Digimon ID Boundaries (min/max)
     // -----------------------------------------------------------
@@ -71,13 +98,7 @@ export default {
     // Accepts both names and IDs because the API supports both.
     async function onSearch(query) {
       if (!query) return
-
-      try {
-        const data = await fetchDigimon(query)
-        activeDigimon.value = data
-      } catch (err) {
-        console.error('Digimon not found:', query)
-      }
+      await loadDigimonWithPreload(query)
     }
 
     // -----------------------------------------------------------
@@ -89,37 +110,33 @@ export default {
 
       const randomId = Math.floor(Math.random() * (maxId.value - minId.value + 1)) + minId.value
 
-      await loadDigimonById(randomId)
+      await loadDigimonWithPreload(randomId)
     }
 
     // -----------------------------------------------------------
     // Navigate to the next Digimon by ID
     // -----------------------------------------------------------
     // If we go beyond maxId → wrap to minId.
-    function showNextDigimon() {
+    async function showNextDigimon() {
       if (!activeDigimon.value) return
 
       let nextId = activeDigimon.value.id + 1
-      if (nextId > maxId.value) {
-        nextId = minId.value // wrap-around
-      }
+      if (nextId > maxId.value) nextId = minId.value
 
-      loadDigimonById(nextId)
+      await loadDigimonWithPreload(nextId)
     }
 
     // -----------------------------------------------------------
     // Navigate to the previous Digimon by ID
     // -----------------------------------------------------------
     // If we go below minId → wrap to maxId.
-    function showPreviousDigimon() {
+    async function showPreviousDigimon() {
       if (!activeDigimon.value) return
 
       let prevId = activeDigimon.value.id - 1
-      if (prevId < minId.value) {
-        prevId = maxId.value // wrap-around
-      }
+      if (prevId < minId.value) prevId = maxId.value
 
-      loadDigimonById(prevId)
+      await loadDigimonWithPreload(prevId)
     }
 
     // -----------------------------------------------------------
