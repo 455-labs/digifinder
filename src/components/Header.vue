@@ -111,115 +111,61 @@ export default {
     Header container:
     Uses a 3-part flex layout:
       LEFT  |  CENTER (logo)  |  RIGHT
-
-    justify-content: space-between keeps left and right on edges,
-    while .center uses flex:1 to force the logo into perfect center.
   -->
   <header class="app-header">
     <div class="container">
-    <!-- LEFT SIDE BUTTONS (Favorites) -->
-    <!-- Buttons grouped inside a flex container -->
-    <div class="side left">
-
-              <!-- Help Button with Tooltip -->
+      <!-- LEFT SIDE BUTTONS -->
+      <div class="side left">
+        <!-- Help Button with Tooltip -->
         <v-tooltip bottom>
           <template #activator="{ props }">
             <v-btn icon v-bind="props" @click="openHelp">
               <v-icon>mdi-help-circle-outline</v-icon>
             </v-btn>
           </template>
-        <span>Help</span>
-      </v-tooltip>
+          <span>Help</span>
+        </v-tooltip>
 
-      <!-- Favorites Button with Tooltip -->
-      <v-tooltip bottom>
-        <template #activator="{ props }">
-          <v-btn icon v-bind="props" @click="openFavorites">
-            <v-icon>mdi-heart-outline</v-icon>
-          </v-btn>
-        </template>
-      <span>Favorites</span>
-      </v-tooltip>
-    </div>
-
-    <!-- CENTER LOGO -->
-    <!-- This block stretches to ensure the logo remains centered -->
-    <div class="center">
-      <h1 class="logo">DIGIFINDER</h1>
-    </div>
-
-    <!-- RIGHT SIDE BUTTONS: Help, Dark Mode, Language menu -->
-    <div class="side right">
-            <!-- Dark Mode Toggle with Tooltip -->
-      <v-tooltip bottom>
-        <template #activator="{ props }">
-          <v-btn icon v-bind="props" @click="toggleDarkMode">
-            <v-icon>
-              {{ darkMode ? "mdi-weather-night" : "mdi-weather-sunny" }}
-            </v-icon>
-          </v-btn>
-        </template>
-        <span>{{ darkMode ? "Switch to Light Mode" : "Switch to Dark Mode" }}</span>
-      </v-tooltip>
-      <!-- Language Button with Tooltip + Click Menu -->
-      <v-menu>
-        <template #activator="{ props: menuProps }">
-          <v-tooltip text="Change language" bottom>
-            <template #activator="{ props: tooltipProps }">
-
-            <!-- Merge both activators: tooltip AND menu -->
-            <v-btn
-              icon
-              v-bind="{ ...tooltipProps, ...menuProps }"
-        >
-              <v-icon>mdi-earth</v-icon>
+        <!-- Favorites Button with Tooltip -->
+        <v-tooltip bottom>
+          <template #activator="{ props }">
+            <v-btn icon v-bind="props" @click="openFavorites">
+              <v-icon>mdi-heart-outline</v-icon>
             </v-btn>
           </template>
+          <span>Favorites</span>
         </v-tooltip>
-      </template>
-
-      <v-list>
-        <v-list-item @click="setLanguage('fi')">🇫🇮 Finnish</v-list-item>
-        <v-list-item @click="setLanguage('en')">🇬🇧 English</v-list-item>
-      </v-list>
-      </v-menu>
-
-    </div>
-      <!-- LEFT SIDE BUTTONS (Favorites) -->
-      <!-- Buttons grouped inside a flex container -->
-      <div class="side left">
-        <!-- Help Button -->
-        <v-btn icon @click="openHelp">
-          <v-icon>mdi-help-circle-outline</v-icon>
-        </v-btn>
-
-        <!-- Favorites Button -->
-        <v-btn icon @click="openFavorites">
-          <v-icon>mdi-heart-outline</v-icon>
-        </v-btn>
       </div>
 
       <!-- CENTER LOGO -->
-      <!-- This block stretches to ensure the logo remains centered -->
       <div class="center">
         <h1 class="logo">DIGIFINDER</h1>
       </div>
 
-      <!-- RIGHT SIDE BUTTONS: Help, Dark Mode, Language menu -->
+      <!-- RIGHT SIDE BUTTONS -->
       <div class="side right">
-        <!-- Dark Mode Toggle -->
-        <v-btn icon @click="toggleDarkMode">
-          <v-icon>
-            {{ darkMode ? 'mdi-weather-night' : 'mdi-weather-sunny' }}
-          </v-icon>
-        </v-btn>
-
-        <!-- Language Selector Menu -->
-        <v-menu>
+        <!-- Dark Mode Toggle with Tooltip -->
+        <v-tooltip bottom>
           <template #activator="{ props }">
-            <v-btn icon v-bind="props">
-              <v-icon>mdi-earth</v-icon>
+            <v-btn icon v-bind="props" @click="toggleDarkMode">
+              <v-icon>
+                {{ darkMode ? 'mdi-weather-night' : 'mdi-weather-sunny' }}
+              </v-icon>
             </v-btn>
+          </template>
+          <span>{{ darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode' }}</span>
+        </v-tooltip>
+
+        <!-- Language Button (Tooltip + Menu) -->
+        <v-menu>
+          <template #activator="{ props: menuProps }">
+            <v-tooltip bottom text="Change language">
+              <template #activator="{ props: tooltipProps }">
+                <v-btn icon v-bind="{ ...tooltipProps, ...menuProps }">
+                  <v-icon>mdi-earth</v-icon>
+                </v-btn>
+              </template>
+            </v-tooltip>
           </template>
 
           <v-list>
