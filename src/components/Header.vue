@@ -21,7 +21,7 @@ import { ref, onMounted } from 'vue'
 export default {
   name: 'HeaderComponent',
 
-  setup() {
+  setup(props, { emit }) {
     // ---------------------------------------------------------
     // DARK MODE (placeholder)
     // ---------------------------------------------------------
@@ -38,22 +38,22 @@ export default {
 
     function toggleDarkMode() {
       darkMode.value = !darkMode.value
-      console.log("Dark mode toggled:", darkMode.value)
+      console.log('Dark mode toggled:', darkMode.value)
 
-      const newTheme = darkMode.value ? "dark" : "light"
-      document.documentElement.setAttribute("data-theme", newTheme)
-      localStorage.setItem("darkMode", newTheme)
+      const newTheme = darkMode.value ? 'dark' : 'light'
+      document.documentElement.setAttribute('data-theme', newTheme)
+      localStorage.setItem('darkMode', newTheme)
     }
 
     onMounted(() => {
-      const saved = localStorage.getItem("darkMode")
+      const saved = localStorage.getItem('darkMode')
 
-      if (saved === "dark") {
+      if (saved === 'dark') {
         darkMode.value = true
-        document.documentElement.setAttribute("data-theme", "dark")
+        document.documentElement.setAttribute('data-theme', 'dark')
       } else {
         darkMode.value = false
-        document.documentElement.setAttribute("data-theme", "light")
+        document.documentElement.setAttribute('data-theme', 'light')
       }
     })
 
@@ -69,7 +69,7 @@ export default {
 
     function setLanguage(lang) {
       language.value = lang
-      console.log("Language changed:", lang)
+      console.log('Language changed:', lang)
     }
 
     // ---------------------------------------------------------
@@ -79,7 +79,7 @@ export default {
     // Right now it only logs the action.
     // ---------------------------------------------------------
     function openFavorites() {
-      console.log("Favorites page will open later")
+      console.log('Favorites page will open later')
     }
 
     // ---------------------------------------------------------
@@ -88,7 +88,7 @@ export default {
     // In the future this will open a modal or a dedicated help page.
     // ---------------------------------------------------------
     function openHelp() {
-      console.log("Help / How-To page will open later")
+      emit('open-help')
     }
 
     // ---------------------------------------------------------
@@ -117,49 +117,49 @@ export default {
   -->
   <header class="app-header">
     <div class="container">
-    <!-- LEFT SIDE BUTTONS (Favorites) -->
-    <!-- Buttons grouped inside a flex container -->
-    <div class="side left">
-      <!-- Help Button -->
-      <v-btn icon @click="openHelp">
-        <v-icon>mdi-help-circle-outline</v-icon>
-      </v-btn>
+      <!-- LEFT SIDE BUTTONS (Favorites) -->
+      <!-- Buttons grouped inside a flex container -->
+      <div class="side left">
+        <!-- Help Button -->
+        <v-btn icon @click="openHelp">
+          <v-icon>mdi-help-circle-outline</v-icon>
+        </v-btn>
 
-      <!-- Favorites Button -->
-      <v-btn icon @click="openFavorites">
-        <v-icon>mdi-heart-outline</v-icon>
-      </v-btn>
-    </div>
+        <!-- Favorites Button -->
+        <v-btn icon @click="openFavorites">
+          <v-icon>mdi-heart-outline</v-icon>
+        </v-btn>
+      </div>
 
-    <!-- CENTER LOGO -->
-    <!-- This block stretches to ensure the logo remains centered -->
-    <div class="center">
-      <h1 class="logo">DIGIFINDER</h1>
-    </div>
+      <!-- CENTER LOGO -->
+      <!-- This block stretches to ensure the logo remains centered -->
+      <div class="center">
+        <h1 class="logo">DIGIFINDER</h1>
+      </div>
 
-    <!-- RIGHT SIDE BUTTONS: Help, Dark Mode, Language menu -->
-    <div class="side right">
-      <!-- Dark Mode Toggle -->
-      <v-btn icon @click="toggleDarkMode">
-        <v-icon>
-          {{ darkMode ? "mdi-weather-night" : "mdi-weather-sunny" }}
-        </v-icon>
-      </v-btn>
+      <!-- RIGHT SIDE BUTTONS: Help, Dark Mode, Language menu -->
+      <div class="side right">
+        <!-- Dark Mode Toggle -->
+        <v-btn icon @click="toggleDarkMode">
+          <v-icon>
+            {{ darkMode ? 'mdi-weather-night' : 'mdi-weather-sunny' }}
+          </v-icon>
+        </v-btn>
 
-      <!-- Language Selector Menu -->
-      <v-menu>
-        <template #activator="{ props }">
-          <v-btn icon v-bind="props">
-            <v-icon>mdi-earth</v-icon>
-          </v-btn>
-        </template>
+        <!-- Language Selector Menu -->
+        <v-menu>
+          <template #activator="{ props }">
+            <v-btn icon v-bind="props">
+              <v-icon>mdi-earth</v-icon>
+            </v-btn>
+          </template>
 
-        <v-list>
-          <v-list-item @click="setLanguage('fi')">🇫🇮 Finnish</v-list-item>
-          <v-list-item @click="setLanguage('en')">🇬🇧 English</v-list-item>
-        </v-list>
-      </v-menu>
-    </div>
+          <v-list>
+            <v-list-item @click="setLanguage('fi')">🇫🇮 Finnish</v-list-item>
+            <v-list-item @click="setLanguage('en')">🇬🇧 English</v-list-item>
+          </v-list>
+        </v-menu>
+      </div>
     </div>
   </header>
 </template>
