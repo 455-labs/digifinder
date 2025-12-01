@@ -21,7 +21,7 @@ import { ref, onMounted } from 'vue'
 export default {
   name: 'HeaderComponent',
 
-  setup(props, { emit }) {
+  setup(_, { emit }) {
     // ---------------------------------------------------------
     // DARK MODE (placeholder)
     // ---------------------------------------------------------
@@ -73,13 +73,14 @@ export default {
     }
 
     // ---------------------------------------------------------
-    // FAVORITES SCREEN (placeholder)
+    // FAVORITES SCREEN
     // ---------------------------------------------------------
-    // In the future this will open a real "Favorites" view or modal.
-    // Right now it only logs the action.
+    // Opens the Favorites dialog in App.vue via an emitted event.
+    // The dialog displays a scrollable list of saved Digimon,
+    // allowing users to view, select, or remove favorites.
     // ---------------------------------------------------------
     function openFavorites() {
-      console.log('Favorites page will open later')
+      emit('open-favorites')
     }
 
     // ---------------------------------------------------------
@@ -130,7 +131,7 @@ export default {
         <v-tooltip bottom>
           <template #activator="{ props }">
             <v-btn icon v-bind="props" @click="openFavorites">
-              <v-icon>mdi-heart-outline</v-icon>
+              <v-icon>mdi-bookmark-outline</v-icon>
             </v-btn>
           </template>
           <span>Favorites</span>

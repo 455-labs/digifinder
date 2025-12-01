@@ -5,6 +5,7 @@ import HeaderComponent from './components/Header.vue'
 import MainComponent from './components/Main.vue'
 import FooterComponent from './components/Footer.vue'
 import Toast from './components/Toast.vue';
+import FavoritesDialog from './components/FavoritesDialog.vue'
 
 import { ref } from 'vue'
 
@@ -14,6 +15,7 @@ export default {
     MainComponent,
     FooterComponent,
     Toast,
+    FavoritesDialog,
   },
 
   data() {
@@ -23,7 +25,7 @@ export default {
     };
   },
 
-    methods: {
+  methods: {
     showToast(msg) {
       this.toastMessage = msg;
       this.toastVisible = true;
@@ -31,15 +33,21 @@ export default {
       setTimeout(() => {
         this.toastVisible = false;
       }, 2500);
+    },
+
+    loadFavorite(id) {
+      this.$refs.main.onSearch(id)
     }
   },
 
   setup() {
     // Shared state for the Help modal
     const howToDialog = ref(false)
+    // Shared state for the Favorites modal
+    const favoritesDialog = ref(false)
 
     // Expose to children via provide/inject OR event listeners
-    return { howToDialog }
+    return { howToDialog, favoritesDialog }
   },
 }
 </script>
@@ -47,17 +55,21 @@ export default {
 <template>
   <div class="app">
     <!-- Header triggers opening the dialog -->
-    <HeaderComponent @open-help="howToDialog = true" />
+    <HeaderComponent
+      @open-help="howToDialog = true"
+      @open-favorites="favoritesDialog = true"
+      @select-favorite="loadFavorite"
+    />
 
     <!-- Main content area -->
-    <MainComponent @toast="showToast" />
+    <MainComponent @toast="showToast" ref="main" />
 
     <!-- Footer -->
     <FooterComponent />
 
     <!-- How to dialog -->
     <v-dialog v-model="howToDialog" max-width="500">
-      <v-card>
+      <v-card class="howto-card">
         <v-card-title class="d-flex justify-space-between align-center">
           How to Use DigiFinder
         </v-card-title>
@@ -74,6 +86,12 @@ export default {
         </v-card-actions>
       </v-card>
     </v-dialog>
+
+    <!-- FAVORITES -->
+    <FavoritesDialog
+      v-model="favoritesDialog"
+      @select="loadFavorite"
+    />
 
     <Toast :message="toastMessage" :visible="toastVisible" />
   </div>

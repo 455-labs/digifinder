@@ -29,6 +29,15 @@ export default {
     }
   },
 
+  mounted() {
+    // Listen for "favorite-updated" events from anywhere in the app
+    window.addEventListener("favorite-updated", this.syncFavorites)
+  },
+
+  beforeUnmount() {
+    window.removeEventListener("favorite-updated", this.syncFavorites)
+  },
+
   methods: {
     // Toggles the favorite icon state
     toggleFavorite() {
@@ -49,6 +58,13 @@ export default {
         "favoriteDigimons",
         JSON.stringify(this.favoriteDigimons)
       )
+
+      window.dispatchEvent(new Event("favorite-updated"))
+    },
+
+    syncFavorites() {
+      const saved = localStorage.getItem("favoriteDigimons")
+      this.favoriteDigimons = saved ? JSON.parse(saved) : []
     },
   },
 
