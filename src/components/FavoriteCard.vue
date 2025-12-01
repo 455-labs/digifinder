@@ -102,23 +102,3 @@ export default {
     </v-btn>
   </v-card>
 </template>
-
-<style scoped>
-/* ---------------------------------------------------------
-   FAVORITE CARD (THEMED)
-   Applies theme variables and consistent styling
---------------------------------------------------------- */
-
-/* Background + text color follow global theme */
-.favorite-card {
-  background-color: var(--surface-card) !important;
-  color: var(--text-primary) !important;
-  border: 1px solid var(--header-bg-dark);
-  border-radius: 8px;
-}
-
-/* Trash icon button uses the heading color in dark/light mode */
-.favorite-card .remove {
-  color: var(--text-heading) !important;
-}
-</style>
