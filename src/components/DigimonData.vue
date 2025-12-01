@@ -32,6 +32,11 @@ export default {
 
     <!-- Each row shows a label on the left and a value on the right -->
     <div class="data-row">
+      <strong>Index:</strong>
+      <span>{{ index }}</span>
+    </div>
+
+    <div class="data-row">
       <strong>Level:</strong>
       <span>{{ level }}</span>
     </div>

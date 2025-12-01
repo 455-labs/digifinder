@@ -29,7 +29,7 @@ import { fetchDigimon, fetchDigimonBounds } from '@/api/digimonApi.js'
 export default {
   components: { SearchBar, DigimonData, DisplayDigimon },
 
-  setup() {
+  setup(_, { emit }) {
     // -----------------------------------------------------------
     // Reactive State
     // -----------------------------------------------------------
@@ -44,30 +44,37 @@ export default {
 
     // Shared function that loads Digimon and preloads image
     async function loadDigimonWithPreload(idOrQuery) {
-      try {
-        const data = await fetchDigimon(idOrQuery)
+    try {
+      const data = await fetchDigimon(idOrQuery)
 
-        const imgUrl = data.images?.[0]?.href
-
-        // If Digimon has no image → set immediately
-        if (!imgUrl) {
-          activeDigimon.value = data
-          return
-        }
-
-        // Preload image BEFORE showing data
-        await new Promise((resolve) => {
-          const img = new Image()
-          img.onload = resolve
-          img.src = imgUrl
-        })
-
-        // Show only when image is ready
-        activeDigimon.value = data
-      } catch (err) {
-        console.error('Digimon not found:', idOrQuery)
+      if (!data || !data.id) {
+        emit('toast', 'Digimon not found!')
+        // activeDigimon.value = null
+        return null
       }
+
+      const imgUrl = data.images?.[0]?.href
+
+      if (!imgUrl) {
+        activeDigimon.value = data
+        return data
+      }
+
+      await new Promise((resolve) => {
+        const img = new Image()
+        img.onload = resolve
+        img.src = imgUrl
+      })
+
+      activeDigimon.value = data
+      return data
+
+    } catch (err) {
+      emit('toast', 'Unable to contact Digimon API')
+      // activeDigimon.value = null
+      return null
     }
+  }
 
     // -----------------------------------------------------------
     // Load Digimon ID Boundaries (min/max)
@@ -81,35 +88,34 @@ export default {
     }
 
     // -----------------------------------------------------------
-    // Wrapper: Load Digimon by ID
-    // -----------------------------------------------------------
-    // This helper function centralizes Digimon loading by ID.
-    // It updates activeDigimon and ensures all navigation logic
-    // (previous, next, random) uses the same code.
-    async function loadDigimonById(id) {
-      const data = await fetchDigimon(id)
-      activeDigimon.value = data
-    }
-
-    // -----------------------------------------------------------
     // Handle Search Input
     // -----------------------------------------------------------
     // Triggered when the SearchBar emits "search" with user input.
     // Accepts both names and IDs because the API supports both.
     async function onSearch(query) {
-      if (!query) return
-      await loadDigimonWithPreload(query)
+    if (!query) {
+      emit('toast', 'Please enter a Digimon name')
+      return
     }
+
+    const result = await loadDigimonWithPreload(query)
+
+    if (!result) {
+      emit('toast', 'Digimon not found!')
+    }
+  }
 
     // -----------------------------------------------------------
     // Fetch a Random Digimon
     // -----------------------------------------------------------
     // Uses the ID range [minId, maxId] to pick a random Digimon.
     async function fetchRandomDigimon() {
-      if (minId.value === null || maxId.value === null) return
+      if (minId.value === null || maxId.value === null) {
+        emit('toast', 'Unable to contact Digimon API')
+        return
+      }
 
       const randomId = Math.floor(Math.random() * (maxId.value - minId.value + 1)) + minId.value
-
       await loadDigimonWithPreload(randomId)
     }
 

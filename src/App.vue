@@ -4,6 +4,7 @@
 import HeaderComponent from './components/Header.vue'
 import MainComponent from './components/Main.vue'
 import FooterComponent from './components/Footer.vue'
+import Toast from './components/Toast.vue';
 
 import { ref } from 'vue'
 
@@ -12,6 +13,25 @@ export default {
     HeaderComponent,
     MainComponent,
     FooterComponent,
+    Toast,
+  },
+
+  data() {
+    return {
+      toastVisible: false,
+      toastMessage: ''
+    };
+  },
+
+    methods: {
+    showToast(msg) {
+      this.toastMessage = msg;
+      this.toastVisible = true;
+
+      setTimeout(() => {
+        this.toastVisible = false;
+      }, 2500);
+    }
   },
 
   setup() {
@@ -30,7 +50,7 @@ export default {
     <HeaderComponent @open-help="howToDialog = true" />
 
     <!-- Main content area -->
-    <MainComponent />
+    <MainComponent @toast="showToast" />
 
     <!-- Footer -->
     <FooterComponent />
@@ -54,5 +74,7 @@ export default {
         </v-card-actions>
       </v-card>
     </v-dialog>
+
+    <Toast :message="toastMessage" :visible="toastVisible" />
   </div>
 </template>
