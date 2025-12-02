@@ -2,6 +2,8 @@
 // Component responsible for displaying the selected Digimon's image
 // and providing user interactions such as marking it as a favorite
 // or navigating between Digimon entries.
+import { i18n } from '@/stores/translation'
+
 export default {
   name: 'DisplayDigimon',
 
@@ -73,6 +75,10 @@ export default {
     isFavorite() {
       return this.favoriteDigimons.includes(this.id)
     }
+  },
+
+  setup() {
+    return { i18n }
   }
 }
 </script>

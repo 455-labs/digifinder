@@ -1,8 +1,14 @@
 <script>
 // Simple footer component displayed at the bottom of the application.
 // Contains minimal content: copyright text and branding.
+import { i18n } from '@/stores/translation'
+
 export default {
   name: 'FooterComponent',
+
+  setup() {
+    return { i18n }
+  }
 }
 </script>
 

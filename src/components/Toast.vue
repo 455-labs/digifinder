@@ -1,8 +1,14 @@
 <script>
+import { i18n } from '@/stores/translation'
+
 export default {
   props: {
     message: String,
     visible: Boolean
+  },
+
+  setup() {
+    return { i18n }
   }
 };
 </script>

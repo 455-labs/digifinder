@@ -6,6 +6,7 @@ import MainComponent from './components/Main.vue'
 import FooterComponent from './components/Footer.vue'
 import Toast from './components/Toast.vue';
 import FavoritesDialog from './components/FavoritesDialog.vue'
+import { i18n } from '@/stores/translation'
 
 import { ref } from 'vue'
 
@@ -47,7 +48,7 @@ export default {
     const favoritesDialog = ref(false)
 
     // Expose to children via provide/inject OR event listeners
-    return { howToDialog, favoritesDialog }
+    return { howToDialog, favoritesDialog, i18n }
   },
 }
 </script>
