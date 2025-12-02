@@ -3,6 +3,8 @@
 // and emits events upward for the parent to handle.
 // This component does NOT communicate with the API directly —
 // it only collects user actions and passes them upward.
+import { i18n } from '@/stores/translation'
+
 export default {
   name: 'SearchBar',
 
@@ -61,6 +63,10 @@ export default {
       this.$emit('random');
     },
   },
+
+  setup() {
+    return { i18n }
+  }
 };
 </script>
 

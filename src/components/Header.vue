@@ -17,6 +17,7 @@
 // ---------------------------------------------------------
 
 import { ref, onMounted } from 'vue'
+import { i18n, setLang } from '@/stores/translation'
 
 export default {
   name: 'HeaderComponent',
@@ -65,11 +66,11 @@ export default {
     // - Save preference to localStorage
     // - Integrate real translation system (i18n)
     // ---------------------------------------------------------
-    const language = ref('fi')
+    const language = ref(i18n.lang)
 
-    function setLanguage(lang) {
+    function changeLanguage(lang) {
+      setLang(lang)
       language.value = lang
-      console.log('Language changed:', lang)
     }
 
     // ---------------------------------------------------------
@@ -107,10 +108,11 @@ export default {
       darkMode,
       language,
       toggleDarkMode,
-      setLanguage,
+      changeLanguage,
       openFavorites,
       openHelp,
       mobileMenu,
+      i18n
     }
   },
 }
@@ -180,8 +182,8 @@ export default {
           </template>
 
           <v-list>
-            <v-list-item @click="setLanguage('fi')">🇫🇮 Finnish</v-list-item>
-            <v-list-item @click="setLanguage('en')">🇬🇧 English</v-list-item>
+            <v-list-item @click="changeLanguage('fi')">🇫🇮 Finnish</v-list-item>
+            <v-list-item @click="changeLanguage('en')">🇬🇧 English</v-list-item>
           </v-list>
         </v-menu>
       </div>
@@ -222,8 +224,9 @@ export default {
           </v-list-item>
           </template>
 
-          <v-list-item @click="setLanguage('fi')">🇫🇮 Finnish</v-list-item>
-          <v-list-item @click="setLanguage('en')">🇬🇧 English</v-list-item>
+          <v-list-item @click="changeLanguage('fi')">🇫🇮 Finnish</v-list-item>
+          <v-list-item @click="changeLanguage('en')">🇬🇧 English</v-list-item>
+
         </v-list-group>
       </v-list>
     </v-navigation-drawer>

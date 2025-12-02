@@ -20,6 +20,7 @@
  * This keeps the card lightweight and purely UI-driven, while the
  * FavoritesDialog handles the actual logic, API calls, storage updates, etc.
  */
+import { i18n } from '@/stores/translation'
 
 export default {
   name: 'FavoriteCard',
@@ -59,7 +60,11 @@ export default {
      * in the main screen.
      */
     'select'
-  ]
+  ],
+
+  setup() {
+    return { i18n }
+  }
 }
 </script>
 
@@ -80,6 +85,7 @@ export default {
     <div class="d-flex align-center">
       <img
         :src="digimon.images[0]?.href"
+        alt="Digimon image"
         width="60"
         height="60"
         style="object-fit: contain; margin-right: 1rem;"

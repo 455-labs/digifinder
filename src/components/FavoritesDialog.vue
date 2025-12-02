@@ -18,6 +18,7 @@
 import { ref, onMounted, watch, computed } from 'vue'
 import FavoriteCard from './FavoriteCard.vue'
 import { fetchDigimon } from '@/api/digimonApi.js'
+import { i18n } from '@/stores/translation'
 
 export default {
   name: 'FavoritesDialog',
@@ -203,7 +204,8 @@ export default {
       loadNextBatch,
       removeFavorite,
       chooseDigimon,
-      onScroll
+      onScroll,
+      i18n
     }
   }
 }

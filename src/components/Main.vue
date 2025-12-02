@@ -13,10 +13,10 @@
 // - Load min/max Digimon ID range from the API
 // - Automatically fetch a random Digimon on page load
 // -------------------------------------------------------------
-
 import SearchBar from './SearchBar.vue'
 import DisplayDigimon from './DisplayDigimon.vue'
 import DigimonData from './DigimonData.vue'
+import { i18n } from '@/stores/translation'
 
 // Vue Composition API tools:
 // - ref(): creates reactive state values
@@ -48,37 +48,36 @@ export default {
 
     // Shared function that loads Digimon and preloads image
     async function loadDigimonWithPreload(idOrQuery) {
-    try {
-      const data = await fetchDigimon(idOrQuery)
+      try {
+        const data = await fetchDigimon(idOrQuery)
 
-      if (!data || !data.id) {
-        emit('toast', 'Digimon not found!')
-        // activeDigimon.value = null
-        return null
-      }
+        if (!data || !data.id) {
+          emit('toast', 'Digimon not found!')
+          // activeDigimon.value = null
+          return null
+        }
 
-      const imgUrl = data.images?.[0]?.href
+        const imgUrl = data.images?.[0]?.href
 
-      if (!imgUrl) {
+        if (!imgUrl) {
+          activeDigimon.value = data
+          return data
+        }
+
+        await new Promise((resolve) => {
+          const img = new Image()
+          img.onload = resolve
+          img.src = imgUrl
+        })
+
         activeDigimon.value = data
         return data
+
+      } catch (err) {
+        emit('toast', 'Unable to contact Digimon API')
+        return null
       }
-
-      await new Promise((resolve) => {
-        const img = new Image()
-        img.onload = resolve
-        img.src = imgUrl
-      })
-
-      activeDigimon.value = data
-      return data
-
-    } catch (err) {
-      emit('toast', 'Unable to contact Digimon API')
-      // activeDigimon.value = null
-      return null
     }
-  }
 
     // -----------------------------------------------------------
     // Load Digimon ID Boundaries (min/max)
@@ -97,17 +96,17 @@ export default {
     // Triggered when the SearchBar emits "search" with user input.
     // Accepts both names and IDs because the API supports both.
     async function onSearch(query) {
-    if (!query) {
-      emit('toast', 'Please enter a Digimon name')
-      return
-    }
+      if (!query) {
+        emit('toast', 'Please enter a Digimon name')
+        return
+      }
 
-    const result = await loadDigimonWithPreload(query)
+      const result = await loadDigimonWithPreload(query)
 
-    if (!result) {
-      emit('toast', 'Digimon not found!')
+      if (!result) {
+        emit('toast', 'Digimon not found!')
+      }
     }
-  }
 
     // -----------------------------------------------------------
     // Fetch a Random Digimon
@@ -171,6 +170,7 @@ export default {
       showNextDigimon,
       showPreviousDigimon,
       toast,
+      i18n
     }
   },
 }

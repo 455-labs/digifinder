@@ -2,6 +2,8 @@
 // Component responsible for displaying structured information
 // about a single Digimon. All data is fed in via props, making
 // the component reusable for any Digimon entry.
+import { i18n } from '@/stores/translation'
+
 export default {
   name: 'DigimonData',
 
@@ -18,6 +20,10 @@ export default {
     // Fields are displayed as a comma-separated string.
     fields: Array, // e.g. ["Nature Spirits", "Dragon’s Roar"]
   },
+
+  setup() {
+    return { i18n }
+  }
 }
 </script>
 
@@ -37,7 +43,7 @@ export default {
     </div>
 
     <div class="data-row">
-      <strong>Level:</strong>
+      <strong>{{ i18n.dict.level }}</strong>
       <span>{{ level }}</span>
     </div>
 
