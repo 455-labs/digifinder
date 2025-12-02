@@ -164,6 +164,8 @@ export default {
     // -----------------------------------------------------------
     return {
       activeDigimon,
+      minId,
+      maxId,
       onSearch,
       fetchRandomDigimon,
       showNextDigimon,
@@ -186,7 +188,13 @@ export default {
         - @search="onSearch"  → to search Digimon by user input
         - @random="fetchRandomDigimon" → to load a random Digimon
       -->
-      <SearchBar @search="onSearch" @random="fetchRandomDigimon" @toast="toast" />
+      <SearchBar
+        :min-id="minId"
+        :max-id="maxId"
+        @search="onSearch"
+        @random="fetchRandomDigimon"
+        @toast="toast"
+      />
 
       <!-- Digimon image card -->
       <DisplayDigimon

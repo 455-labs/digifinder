@@ -6,6 +6,12 @@
 export default {
   name: 'SearchBar',
 
+  // Uses min/max indexes which are exported from src/components/Main.vue
+  props: {
+    minId: Number,
+    maxId: Number,
+  },
+
   data() {
     return {
       query: '',
@@ -22,8 +28,9 @@ export default {
       if (/^\d+$/.test(value)) {
         const num = Number(value);
 
-      if (num < 1 || num > 1488) {
-        this.error = 'Index has to be between 1-1488.';
+      if (num < this.minId || num > this.maxId) {
+        this.error = `Index has to be between ${this.minId}-${this.maxId}.`;
+
         this.$emit('toast', this.error);
         return;
       }
