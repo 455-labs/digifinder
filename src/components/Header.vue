@@ -255,7 +255,7 @@ export default {
 .container {
   display: flex;
   gap: 1.5rem;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -330,14 +330,26 @@ export default {
     display: none;
   }
 
+  .container {
+    position: relative;
+    height: 48px;
+  }
+
   .hamburger {
     display: inline-flex;
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
   }
 
   .center {
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
   }
 }
 </style>
