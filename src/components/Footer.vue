@@ -27,7 +27,11 @@ export default {
   align-items: center;
   justify-content: center;
   padding: 0.5rem 0.5rem;
-  background-color: var(--header-bg);
+  background: linear-gradient( to right,
+    var(--header-bg-dark) 0%,
+    var(--header-bg) 50%,
+    var(--header-bg-dark) 100%
+  );
   border-top: 1px solid #000000;
   font-family: Consolas, monospace;
   color: var(--text-primary);
