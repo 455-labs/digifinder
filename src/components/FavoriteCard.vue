@@ -102,3 +102,59 @@ export default {
     </v-btn>
   </v-card>
 </template>
+
+<style scoped>
+.favorites-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: +.5rem;
+}
+
+.favorite-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.favorite-card img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin-right: 0.5rem;
+}
+
+.favorite-card strong {
+  font-size: 1rem;
+}
+
+.favorite-card .remove {
+  margin-left: auto;
+}
+
+/* TABLET / DESKTOP */
+@media (min-width: 600px) {
+  .favorites-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .favorite-card {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .favorite-card .remove {
+    align-self: center;
+  }
+}
+</style>
