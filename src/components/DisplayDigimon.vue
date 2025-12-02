@@ -130,6 +130,7 @@ export default {
 <style scoped>
 .digimon-card {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   background: var(--surface-card);
@@ -145,13 +146,14 @@ export default {
   margin: 1rem;
   object-fit: contain;
   border: 1px solid black;
-  max-width: 65%;
+  max-width: 90%;
   height: auto;
 }
 
 .button-column {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
   margin: 1rem;
   gap: 1rem;
 }
@@ -160,5 +162,25 @@ export default {
   background-color: var(--bg-gradient-bottom) !important;
   color: white !important;
   border-radius: 50%;
+}
+
+/* MOBILE-FIRST */
+@media (min-width: 600px) {
+  .digimon-card {
+    flex-direction: row;
+    justify-content: space-between;
+    min-height: 350px;
+  }
+
+  .digimon-img {
+    max-width: 65%;
+    margin: 1rem;
+  }
+
+  .button-column {
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1rem;
+  }
 }
 </style>

@@ -53,6 +53,7 @@ export default {
 </script>
 
 <template>
+  <v-app>
   <div class="app">
     <!-- Header triggers opening the dialog -->
     <HeaderComponent
@@ -95,4 +96,5 @@ export default {
 
     <Toast :message="toastMessage" :visible="toastVisible" />
   </div>
+  </v-app>
 </template>
