@@ -15,7 +15,7 @@ export default {
   data() {
     return {
       query: '',
-      error: '',     // Error message to UI
+      error: '', // Error message to UI
     }
   },
 
@@ -24,7 +24,7 @@ export default {
       const value = this.query.trim();
       this.error = '';
 
-      // 1) Search using id value
+      // 1) Search using id value, regex checks if every character is number
       if (/^\d+$/.test(value)) {
         const num = Number(value);
 
@@ -35,7 +35,7 @@ export default {
         return;
       }
 
-        // Valid numeric search
+        // Valid numeric search to emits search to Main.vue
         this.$emit('search', num);
         return;
       }
@@ -53,7 +53,7 @@ export default {
         return;
       }
 
-      // Valid name to search
+      // Valid name to search that is emitted to Main.vue
       this.$emit('search', value);
     },
 
