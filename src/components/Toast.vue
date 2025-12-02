@@ -38,4 +38,11 @@ export default {
 .fade-enter, .fade-leave-to {
   opacity: 0;
 }
+
+@media (max-width: 360px) {
+  .toast {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+}
 </style>

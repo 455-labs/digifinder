@@ -93,6 +93,14 @@ export default {
     }
 
     // ---------------------------------------------------------
+    // NAVIGATION BUTTON FOR MOBILE
+    // ---------------------------------------------------------
+    // Header buttons move below the navigation button when
+    // the device width is less than 600 px.
+    // ---------------------------------------------------------
+    const mobileMenu = ref(false)
+
+    // ---------------------------------------------------------
     // Expose everything to the template
     // ---------------------------------------------------------
     return {
@@ -102,6 +110,7 @@ export default {
       setLanguage,
       openFavorites,
       openHelp,
+      mobileMenu,
     }
   },
 }
@@ -115,8 +124,9 @@ export default {
   -->
   <header class="app-header">
     <div class="container">
+
       <!-- LEFT SIDE BUTTONS -->
-      <div class="side left">
+      <div class="side left desktop-only">
         <!-- Help Button with Tooltip -->
         <v-tooltip bottom>
           <template #activator="{ props }">
@@ -144,7 +154,7 @@ export default {
       </div>
 
       <!-- RIGHT SIDE BUTTONS -->
-      <div class="side right">
+      <div class="side right desktop-only">
         <!-- Dark Mode Toggle with Tooltip -->
         <v-tooltip bottom>
           <template #activator="{ props }">
@@ -175,7 +185,48 @@ export default {
           </v-list>
         </v-menu>
       </div>
+
+      <!-- MOBILE MENU NAV-BUTTON -->
+      <v-btn class="hamburger" icon @click="mobileMenu = true">
+        <v-icon>mdi-menu</v-icon>
+      </v-btn>
     </div>
+
+    <!-- MOBILE DRAWER -->
+     <v-navigation-drawer
+     v-model="mobileMenu"
+     temporary
+     location="right"
+     :class="darkMode ? 'mobile-drawer-dark' : 'mobile-drawer-light'">
+        <v-list>
+        <v-list-item @click="openHelp">
+          <v-icon left>mdi-help-circle-outline</v-icon>
+          Help
+        </v-list-item>
+
+        <v-list-item @click="openFavorites">
+          <v-icon left>mdi-bookmark-outline</v-icon>
+          Favorites
+        </v-list-item>
+
+        <v-list-item @click="toggleDarkMode">
+          <v-icon left>{{ darkMode ? 'mdi-weather-night' : 'mdi-weather-sunny' }}</v-icon>
+          {{ darkMode ? 'Light Mode' : 'Dark Mode' }}
+        </v-list-item>
+
+        <v-list-group>
+          <template #activator="{ props }">
+          <v-list-item v-bind="props" class="d-flex align-center">
+            <v-icon class="me-2">mdi-earth</v-icon>
+            Language
+          </v-list-item>
+          </template>
+
+          <v-list-item @click="setLanguage('fi')">🇫🇮 Finnish</v-list-item>
+          <v-list-item @click="setLanguage('en')">🇬🇧 English</v-list-item>
+        </v-list-group>
+      </v-list>
+    </v-navigation-drawer>
   </header>
 </template>
 
@@ -202,8 +253,10 @@ export default {
 }
 
 .container {
-  max-width: 100%;
   display: flex;
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* ---------------------------------------------------------
@@ -254,5 +307,37 @@ export default {
 
 .side.right {
   justify-content: flex-end;
+}
+
+/* Navigation button */
+.hamburger {
+  display: none;
+}
+
+.mobile-drawer-light {
+  background-color: var(--surface-card);
+  color: var(--text-primary);
+}
+
+.mobile-drawer-dark {
+  background-color: #1a1d21;
+  color: #f5f5f5;
+}
+
+/* MOBILE FIRST */
+@media (max-width: 600px) {
+  .desktop-only {
+    display: none;
+  }
+
+  .hamburger {
+    display: inline-flex;
+  }
+
+  .center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 </style>

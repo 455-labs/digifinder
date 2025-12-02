@@ -279,4 +279,16 @@ export default {
 .favorites-list .v-btn {
   color: var(--text-heading) !important;
 }
+
+@media (max-width: 400px) {
+  .favorites-scroll {
+    max-height: 50vh;
+  }
+}
+
+@media (min-width: 800px) {
+  .v-dialog {
+    max-width: 700px;
+  }
+}
 </style>

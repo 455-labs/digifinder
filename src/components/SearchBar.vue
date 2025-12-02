@@ -122,4 +122,10 @@ export default {
 .digibtn .v-ripple__animation {
   background-color: var(--header-bg) !important;
 }
+
+@media (min-width: 600px) {
+  .button-row {
+    flex-direction: row;
+  }
+}
 </style>
