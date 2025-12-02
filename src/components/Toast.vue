@@ -21,7 +21,7 @@ export default {
   top: 20px;          /* place near the top */
   left: 50%;          /* center horizontally */
   transform: translateX(-50%);  /* adjust to true center */
-  background: #ff3b3b;
+  background: #B30000;
   color: white;
   padding: 12px 18px;
   border-radius: 6px;

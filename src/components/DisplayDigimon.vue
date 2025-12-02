@@ -91,8 +91,9 @@ export default {
       <v-tooltip open-on-hover bottom>
         <template #activator="{ props }">
           <v-btn
+            class="favorite-btn"
+            :class="{ active: isFavorite }"
             icon
-            :color="isFavorite ? 'red' : 'grey'"
             @click="toggleFavorite"
             v-bind="props"
             :title="isFavorite ? 'Unlike' : 'Like'"
@@ -158,10 +159,19 @@ export default {
   gap: 1rem;
 }
 
+.favorite-btn {
+  background-color: var(--favorite-btn) !important;
+  color: var(--btn-symbol-color) !important;
+}
+
+.favorite-btn.active {
+  background-color: var(--favorite-btn-active) !important;
+  color: var(--btn-symbol-color) !important;
+}
+
 .circle-btn {
-  background-color: var(--bg-gradient-bottom) !important;
-  color: white !important;
-  border-radius: 50%;
+  background-color: var(--arrow-btn) !important;
+  color: var(--btn-symbol-color) !important;
 }
 
 /* MOBILE-FIRST */

@@ -15,13 +15,23 @@
      Header Bar Colors
      ------------------------------ */
   --header-bg: #2575ae;
-  --header-bg-dark: #034a7c;
+  --header-bg-dark: #03416d;
 
   /* ------------------------------
      Text Colors
      ------------------------------ */
   --text-primary: #000000;
-  --text-heading: #034a7c;
+  --text-heading: #03416d;
+
+  /* ------------------------------
+     Button Colors
+     ------------------------------ */
+  --favorite-btn: #2575ae;
+  --favorite-btn-active: #eb0000;
+
+  --arrow-btn: #03416d;
+
+  --btn-symbol-color: white;
 }
 
 /* --------------------------------
@@ -51,6 +61,16 @@
      ------------------------------ */
   --text-primary: #e6e6e6;
   --text-heading: #90c4ff;
+
+  /* ------------------------------
+     Button Colors (Dark)
+     ------------------------------ */
+  --favorite-btn: #000000;
+  --favorite-btn-active: red;
+
+  --arrow-btn: #000000;
+
+  --btn-symbol-color: white;
 }
 
 body,

@@ -248,7 +248,11 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding: 1rem 1rem;
-  background-color: var(--header-bg);
+  background: linear-gradient( to right,
+    var(--header-bg-dark) 0%,
+    var(--header-bg) 50%,
+    var(--header-bg-dark) 100%
+  );
   border-bottom: 1px solid #000;
 }
 
