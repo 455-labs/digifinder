@@ -24,7 +24,7 @@ export default {
   components: { FavoriteCard },
 
   // The parent listens for this event to load a selected Digimon.
-  emits: ['select'],
+  emits: ['select', 'update:modelValue'],
 
   props: {
     // v-model binding: true = open, false = closed
