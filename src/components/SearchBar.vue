@@ -8,26 +8,53 @@ export default {
 
   data() {
     return {
-      // Bound to the text field; stores the user's search query
       query: '',
+      error: '',     // Error message to UI
     }
   },
 
   methods: {
-    // Triggered when the user clicks the "Search" button.
-    // For now, logs the query but can later be connected to an API call
     searchDigimon() {
-      console.log('Searching:', this.query)
-      this.$emit('search', this.query)
+      const value = this.query.trim();
+      this.error = '';
+
+      // 1) Search using id value
+      if (/^\d+$/.test(value)) {
+        const num = Number(value);
+
+      if (num < 1 || num > 1488) {
+        this.error = 'Index has to be between 1-1488.';
+        this.$emit('toast', this.error);
+        return;
+      }
+
+        // Valid numeric search
+        this.$emit('search', num);
+        return;
+      }
+
+      // 2) Search using name
+      if (value.length < 3) {
+        this.error = 'Minimum length for Digimon name is 3 characters.';
+        this.$emit('toast', this.error);
+        return;
+      }
+
+      if (value.length > 55) {
+        this.error = 'Maximum length for Digimon name is 55 characters.';
+        this.$emit('toast', this.error);
+        return;
+      }
+
+      // Valid name to search
+      this.$emit('search', value);
     },
 
-    // Random Digimon selection button.
-    // Emit a random request upward
     randomDigimon() {
-      this.$emit('random')
+      this.$emit('random');
     },
   },
-}
+};
 </script>
 
 <template>
