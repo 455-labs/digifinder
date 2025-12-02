@@ -42,6 +42,10 @@ export default {
     const minId = ref(null)
     const maxId = ref(null)
 
+    function toast(msg) {
+      emit('toast', msg);
+    }
+
     // Shared function that loads Digimon and preloads image
     async function loadDigimonWithPreload(idOrQuery) {
     try {
@@ -164,6 +168,7 @@ export default {
       fetchRandomDigimon,
       showNextDigimon,
       showPreviousDigimon,
+      toast,
     }
   },
 }
@@ -181,7 +186,7 @@ export default {
         - @search="onSearch"  → to search Digimon by user input
         - @random="fetchRandomDigimon" → to load a random Digimon
       -->
-      <SearchBar @search="onSearch" @random="fetchRandomDigimon" />
+      <SearchBar @search="onSearch" @random="fetchRandomDigimon" @toast="toast" />
 
       <!-- Digimon image card -->
       <DisplayDigimon
