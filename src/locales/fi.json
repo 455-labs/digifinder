@@ -3,9 +3,35 @@
   "random": "Satunnainen",
   "favorites": "Suosikit",
   "help": "Ohje",
-  "favorite": "Tykkää",
-  "unfavorite": "Poista tykkäys",
+  "favorite": "Lisää Suosikkeihin",
+  "unfavorite": "Poista Suosikeista",
   "prev": "Edellinen",
   "next": "Seuraava",
-  "level": "Taso:"
+  "level": "Taso:",
+  "index": "Tunnus:",
+  "attribute": "Ominaisuus:",
+  "type": "Tyyppi:",
+  "fields": "Kentät:",
+
+
+  "title": "Kuinka käyttää DigiFinderia?",
+  "searchTitle": "Etsi Digimoneja: ",
+  "searchText": "Kirjoita Digimonin nimi tai tunnus ja paina 'Hae'.",
+  "randomTitle": "Satunnainen: ",
+  "randomText": "Paina 'Satunnainen' saadaksesi näytölle satunnaisen Digimonin.",
+  "navigateTitle": "Siirtyminen: ",
+  "navigateText": "Käytä nuolipainikkeita siirtyäksesi Digimonien välillä.",
+  "favoritesTitle": "Suosikit: ",
+  "favoritesText": "Napauta sydäntä lisätäksesi Digimonin suosikkeihisi.",
+  "close": "Sulje",
+
+  "favoDigi": "Suosikki Digimonisi",
+
+  "lightmode": "Vaalea tila",
+  "darkmode": "Tumma tila",
+  "changelang": "Vaihda kieltä",
+  "fi": "🇫🇮 Suomi",
+  "en": "🇬🇧 Englanti",
+
+  "label": "Etsi Digimonia..."
 }

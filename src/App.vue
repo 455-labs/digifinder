@@ -73,18 +73,18 @@ export default {
     <v-dialog v-model="howToDialog" max-width="500">
       <v-card class="howto-card">
         <v-card-title class="d-flex justify-space-between align-center">
-          How to Use DigiFinder
+          {{ i18n.dict.title }}
         </v-card-title>
 
         <v-card-text>
-          <p>🔍 <strong>Search Digimon:</strong> Write a Digimon name or ID and press Search.</p>
-          <p>🎲 <strong>Random:</strong> Press Random to get a random Digimon.</p>
-          <p>⬅️➡️ <strong>Navigate:</strong> Use arrows to move between Digimon.</p>
-          <p>❤️ <strong>Favorites:</strong> Tap the heart to save a Digimon.</p>
+          <p>🔍 <strong>{{ i18n.dict.searchTitle }}</strong> {{ i18n.dict.searchText }}</p>
+          <p>🎲 <strong>{{ i18n.dict.randomTitle }}</strong> {{ i18n.dict.randomText }}</p>
+          <p>⬅️➡️ <strong>{{ i18n.dict.navigateTitle }}</strong>{{ i18n.dict.navigateText }}</p>
+          <p>❤️ <strong>{{ i18n.dict.favoritesTitle }}</strong>{{ i18n.dict.favoritesText }}</p>
         </v-card-text>
 
         <v-card-actions>
-          <v-btn color="primary" block @click="howToDialog = false"> Close </v-btn>
+          <v-btn color="primary" block @click="howToDialog = false"> {{ i18n.dict.close }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

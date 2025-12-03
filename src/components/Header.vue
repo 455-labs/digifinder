@@ -136,7 +136,7 @@ export default {
               <v-icon>mdi-help-circle-outline</v-icon>
             </v-btn>
           </template>
-          <span>Help</span>
+          <span>{{ i18n.dict.help }}</span>
         </v-tooltip>
 
         <!-- Favorites Button with Tooltip -->
@@ -146,7 +146,7 @@ export default {
               <v-icon>mdi-bookmark-outline</v-icon>
             </v-btn>
           </template>
-          <span>Favorites</span>
+          <span>{{ i18n.dict.favorites }}</span>
         </v-tooltip>
       </div>
 
@@ -166,7 +166,7 @@ export default {
               </v-icon>
             </v-btn>
           </template>
-          <span>{{ darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode' }}</span>
+          <span>{{ darkMode ? i18n.dict.lightmode :  i18n.dict.darkmode }}</span>
         </v-tooltip>
 
         <!-- Language Button (Tooltip + Menu) -->
@@ -182,8 +182,8 @@ export default {
           </template>
 
           <v-list>
-            <v-list-item @click="changeLanguage('fi')">🇫🇮 Finnish</v-list-item>
-            <v-list-item @click="changeLanguage('en')">🇬🇧 English</v-list-item>
+            <v-list-item @click="changeLanguage('fi')">{{ i18n.dict.fi }}</v-list-item>
+            <v-list-item @click="changeLanguage('en')">{{ i18n.dict.en }}</v-list-item>
           </v-list>
         </v-menu>
       </div>
@@ -203,24 +203,24 @@ export default {
         <v-list>
         <v-list-item @click="openHelp">
           <v-icon left>mdi-help-circle-outline</v-icon>
-          Help
+          {{ i18n.dict.help }}
         </v-list-item>
 
         <v-list-item @click="openFavorites">
           <v-icon left>mdi-bookmark-outline</v-icon>
-          Favorites
+          {{ i18n.dict.favorites }}
         </v-list-item>
 
         <v-list-item @click="toggleDarkMode">
           <v-icon left>{{ darkMode ? 'mdi-weather-night' : 'mdi-weather-sunny' }}</v-icon>
-          {{ darkMode ? 'Light Mode' : 'Dark Mode' }}
+          {{ darkMode ? i18n.dict.lightmode :  i18n.dict.darkmode }}
         </v-list-item>
 
         <v-list-group>
           <template #activator="{ props }">
           <v-list-item v-bind="props" class="d-flex align-center">
             <v-icon class="me-2">mdi-earth</v-icon>
-            Language
+            {{ i18n.dict.changelang }}
           </v-list-item>
           </template>
 

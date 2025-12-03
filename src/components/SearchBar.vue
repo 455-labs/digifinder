@@ -99,8 +99,8 @@ export default {
       Buttons share styling via the "digibtn" class.
     -->
     <div class="button-row">
-      <v-btn class="digibtn" variant="flat" @click="searchDigimon">Search</v-btn>
-      <v-btn class="digibtn" variant="flat" @click="randomDigimon">Random</v-btn>
+      <v-btn class="digibtn" variant="flat" @click="searchDigimon">{{ i18n.dict.search }}</v-btn>
+      <v-btn class="digibtn" variant="flat" @click="randomDigimon">{{ i18n.dict.random }}</v-btn>
     </div>
   </div>
 </template>

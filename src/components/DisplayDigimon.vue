@@ -108,7 +108,7 @@ export default {
             <v-icon>{{ isFavorite ? 'mdi-heart' : 'mdi-heart-outline' }}</v-icon>
           </v-btn>
         </template>
-        <span>{{ isFavorite ? 'Unlike' : 'Like' }}</span>
+        <span>{{ isFavorite ? i18n.dict.unfavorite  :  i18n.dict.favorite }}</span>
       </v-tooltip>
 
       <!-- Previous Digimon button with tooltip -->
@@ -118,7 +118,7 @@ export default {
             <v-icon>mdi-chevron-left</v-icon>
           </v-btn>
         </template>
-        <span>Previous</span>
+        <span>{{ i18n.dict.prev }}</span>
       </v-tooltip>
 
       <!-- Next Digimon button with tooltip -->
@@ -128,7 +128,7 @@ export default {
             <v-icon>mdi-chevron-right</v-icon>
           </v-btn>
         </template>
-        <span>Next</span>
+        <span>{{ i18n.dict.next }}</span>
       </v-tooltip>
     </div>
   </div>

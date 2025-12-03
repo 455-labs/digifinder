@@ -216,7 +216,7 @@ export default {
   <v-dialog v-model="dialogOpen" max-width="500">
     <v-card class="favorites-list">
       <v-card-title class="text-h6">
-        Favorite Digimons
+        {{ i18n.dict.favoDigi }}
       </v-card-title>
 
       <!-- Scrollable content container -->
@@ -239,7 +239,7 @@ export default {
       <!-- Close button -->
       <v-card-actions>
         <v-btn color="primary" block @click="dialogOpen = false">
-          Close
+          {{ i18n.dict.close }}
         </v-btn>
       </v-card-actions>
     </v-card>

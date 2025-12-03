@@ -38,7 +38,7 @@ export default {
 
     <!-- Each row shows a label on the left and a value on the right -->
     <div class="data-row">
-      <strong>Index:</strong>
+      <strong>{{ i18n.dict.index }}</strong>
       <span>{{ index }}</span>
     </div>
 
@@ -48,17 +48,17 @@ export default {
     </div>
 
     <div class="data-row">
-      <strong>Attribute:</strong>
+      <strong>{{ i18n.dict.attribute }}</strong>
       <span>{{ attribute }}</span>
     </div>
 
     <div class="data-row">
-      <strong>Type:</strong>
+      <strong>{{ i18n.dict.type }}</strong>
       <span>{{ type }}</span>
     </div>
 
     <div class="data-row">
-      <strong>Fields:</strong>
+      <strong>{{ i18n.dict.fields }}</strong>
       <span>{{ fields?.map((f) => f.field).join(', ') }}</span>
     </div>
   </div>

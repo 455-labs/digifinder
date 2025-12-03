@@ -1,11 +1,37 @@
 {
   "search": "Search",
-  "random": "Random",
   "favorites": "Favorites",
+  "random": "Random",
   "help": "Help",
-  "like": "Like",
-  "unlike": "Unlike",
+  "favorite": "Add to Favorites",
+  "unfavorite": "Remove from Favorites",
   "prev": "Previous",
   "next": "Next",
-  "level": "Level:"
+  "level": "Level:",
+  "index": "Index:",
+  "attribute": "Attribute:",
+  "type": "Type:",
+  "fields": "Fields:",
+
+
+  "title": "How to use DigiFinder?",
+  "searchTitle": "Search Digimons: ",
+  "searchText": "Write a Digimon name or ID and press Search.",
+  "randomTitle": "Random: ",
+  "randomText": "Press Random to get a random Digimon.",
+  "navigateTitle": "Navigate: ",
+  "navigateText": "Use arrows to move between Digimons.",
+  "favoritesTitle": "Favorites: ",
+  "favoritesText": "Click the heart to save Digimon to your favorites.",
+  "close": "Close",
+
+  "favoDigi": "Favorite Digimons",
+
+  "lightmode": "Light mode",
+  "darkmode": "Dark mode",
+  "changelang": "Change language",
+  "fi": "🇫🇮 Finnish",
+  "en": "🇬🇧 English",
+
+  "label": "Search Digimon..."
 }
