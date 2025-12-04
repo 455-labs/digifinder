@@ -41,3 +41,21 @@ export async function fetchDigimonBounds() {
     max: Math.max(...ids),
   }
 }
+
+// Fetch all Digimon names
+
+export async function fetchAllDigimons() {
+  try {
+  const res = await axios.get(`${API_BASE}?pageSize=9999`)
+  const list = res.data.content
+
+  if (!Array.isArray(list) || list.length === 0) {
+    throw new Error('Failed to load Digimon list.')
+  }
+
+  return list.map(d => d.name)
+} catch (err) {
+  console.error('fetchAllDigimons error:', err)
+  return []
+}
+}

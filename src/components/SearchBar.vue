@@ -12,6 +12,10 @@ export default {
   props: {
     minId: Number,
     maxId: Number,
+    suggestions: {
+      type: Array,
+      default: () => []
+    }
   },
 
   data() {
@@ -84,13 +88,18 @@ export default {
       - "solo" variant for a cleaner look
       - "enter" key to search
     -->
-    <v-text-field
+
+    <!-- Autocomplete / search field -->
+     <v-autocomplete
       v-model="query"
-      label="Search Digimon..."
+      :items="suggestions"
+      :label="i18n.dict.label"
       variant="solo"
       clearable
       prepend-inner-icon="mdi-magnify"
       class="search-input"
+      hide-no-data
+      hide-details
       @keyup.enter="searchDigimon"
     />
 

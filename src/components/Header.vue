@@ -224,8 +224,8 @@ export default {
           </v-list-item>
           </template>
 
-          <v-list-item @click="changeLanguage('fi')">🇫🇮 Finnish</v-list-item>
-          <v-list-item @click="changeLanguage('en')">🇬🇧 English</v-list-item>
+          <v-list-item @click="changeLanguage('fi')">{{ i18n.dict.fi }}</v-list-item>
+          <v-list-item @click="changeLanguage('en')">{{ i18n.dict.en }}</v-list-item>
 
         </v-list-group>
       </v-list>

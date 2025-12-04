@@ -24,7 +24,7 @@ import { i18n } from '@/stores/translation'
 import { ref, onMounted } from 'vue'
 
 // API helper functions (located in /src/api/digimonApi.js)
-import { fetchDigimon, fetchDigimonBounds } from '@/api/digimonApi.js'
+import { fetchAllDigimons, fetchDigimon, fetchDigimonBounds } from '@/api/digimonApi.js'
 
 export default {
   components: { SearchBar, DigimonData, DisplayDigimon },
@@ -41,6 +41,18 @@ export default {
     // Used for random selection and next/previous navigation.
     const minId = ref(null)
     const maxId = ref(null)
+
+    // Searchbar autocomplete suggestions
+    const allDigimonNames = ref([])
+
+    async function loadAllDigimons() {
+      try {
+        const all = await fetchAllDigimons()
+        allDigimonNames.value = all
+      } catch (err) {
+        emit('toast', 'Unable to load Digimon list for suggestions')
+      }
+    }
 
     function toast(msg) {
       emit('toast', msg);
@@ -156,6 +168,7 @@ export default {
     onMounted(async () => {
       await loadBounds()
       await fetchRandomDigimon()
+      await loadAllDigimons()
     })
 
     // -----------------------------------------------------------
@@ -169,6 +182,7 @@ export default {
       fetchRandomDigimon,
       showNextDigimon,
       showPreviousDigimon,
+      allDigimonNames,
       toast,
       i18n
     }
@@ -191,6 +205,7 @@ export default {
       <SearchBar
         :min-id="minId"
         :max-id="maxId"
+        :suggestions="allDigimonNames"
         @search="onSearch"
         @random="fetchRandomDigimon"
         @toast="toast"
