@@ -129,6 +129,7 @@ export default {
 /* Width of the search input field (main search box) */
 .search-input {
   width: 100%;
+  padding: 1rem  0;
 }
 
 /* Horizontal row for action buttons, with spacing between them */
