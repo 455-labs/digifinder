@@ -103,8 +103,9 @@ export default {
   Flex layout ensures proper spacing between elements.
 */
 .data-row {
-  display: flex;
-  gap: 0.5rem;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 3rem;
   font-size: 1.1rem;
 }
 
