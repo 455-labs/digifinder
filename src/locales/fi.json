@@ -27,6 +27,9 @@
 
   "favoDigi": "Suosikki Digimonisi",
 
+  "remove": "Poista Digimon suosikeista",
+  "inspect": "Tutki Digimonia",
+
   "lightmode": "Vaalea tila",
   "darkmode": "Tumma tila",
   "changelang": "Vaihda kieltä",

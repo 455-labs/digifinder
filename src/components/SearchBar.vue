@@ -86,7 +86,8 @@ export default {
     -->
     <v-text-field
       v-model="query"
-      label="Search Digimon..."
+      :label="i18n.dict.label"
+      :key="i18n.lang"
       variant="solo"
       clearable
       prepend-inner-icon="mdi-magnify"

@@ -172,7 +172,7 @@ export default {
         <!-- Language Button (Tooltip + Menu) -->
         <v-menu>
           <template #activator="{ props: menuProps }">
-            <v-tooltip bottom text="Change language">
+            <v-tooltip bottom :text="i18n.dict.changelang">
               <template #activator="{ props: tooltipProps }">
                 <v-btn icon v-bind="{ ...tooltipProps, ...menuProps }">
                   <v-icon>mdi-earth</v-icon>

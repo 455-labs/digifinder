@@ -27,6 +27,9 @@
 
   "favoDigi": "Favorite Digimons",
 
+  "remove": "Remove Digimon from favorites",
+  "inspect": "Inspect Digimon",
+
   "lightmode": "Light mode",
   "darkmode": "Dark mode",
   "changelang": "Change language",

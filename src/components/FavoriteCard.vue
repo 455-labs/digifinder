@@ -81,8 +81,8 @@ export default {
     style="cursor: pointer;"
     @click="$emit('select', digimon.id)"
   >
-    <!-- LEFT SIDE: Digimon thumbnail + name -->
-    <div class="d-flex align-center">
+    <!-- LEFT SIDE: Digimon thumbnail + name with tooltip -->
+    <div class="d-flex align-center" v-bind="props">
       <img
         :src="digimon.images[0]?.href"
         alt="Digimon image"
@@ -90,22 +90,36 @@ export default {
         height="60"
         style="object-fit: contain; margin-right: 1rem;"
       />
-      <strong>{{ digimon.name }}</strong>
-    </div>
 
-    <!-- RIGHT SIDE: Delete button -->
+      <v-tooltip bottom>
+        <template #activator="{ props }">
+          <span v-bind="props" style="cursor: pointer;">
+      <strong>{{ digimon.name }}</strong>
+      </span>
+    </template>
+    <span>{{ i18n.dict.inspect }}</span>
+  </v-tooltip>
+  </div>
+
+    <!-- RIGHT SIDE: Delete button with tooltip -->
     <!--
       @click.stop prevents the click event from bubbling up
       to the card’s main click handler.
     -->
+      <v-tooltip bottom>
+        <template #activator="{ props }">
     <v-btn
       class="remove"
       icon
       color="red"
       @click.stop="$emit('remove', digimon.id)"
-    >
+      v-bind="props"
+      >
       <v-icon>mdi-trash-can-outline</v-icon>
     </v-btn>
+  </template>
+  <span>{{ i18n.dict.remove }}</span>
+</v-tooltip>
   </v-card>
 </template>
 
