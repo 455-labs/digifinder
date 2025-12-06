@@ -152,7 +152,7 @@ export default {
 
       <!-- CENTER LOGO -->
       <div class="center">
-        <h1 class="logo">DIGIFINDER</h1>
+        <div class="logo"></div>
       </div>
 
       <!-- RIGHT SIDE BUTTONS -->
@@ -270,18 +270,16 @@ export default {
    CENTER LOGO STYLE
 --------------------------------------------------------- */
 .logo {
-  margin: 0;
-  text-align: center;
-  font-size: 2rem;
-  font-family: Consolas, monospace;
+  width: 285px;
+  height: 30px;
 
-  /* Gradient applied to text */
-  background: linear-gradient(to bottom, var(--bg-gradient-top), var(--bg-gradient-bottom));
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 2px var(--header-bg-dark);
+  background-image: var(--app-logo);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  /* Poista tekstityyli */
+  font-size: 0;
 }
 
 /*
@@ -291,6 +289,7 @@ export default {
   flex: 1;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 /* ---------------------------------------------------------
