@@ -99,3 +99,69 @@ export default {
   </div>
   </v-app>
 </template>
+
+<style scoped>
+  /* ---------------------------------------------
+  HOW-TO DIALOG STYLING
+  Uses global theme colors (light / dark)
+  --------------------------------------------- */
+
+  /* Main card background + text */
+  .howto-card {
+    background-color: var(--surface-card) !important; /* Card background adapts to theme */
+    color: var(--text-primary) !important; /* Body text color adapts to theme */
+  }
+
+  /* Title style */
+  .howto-card .v-card-title {
+    color: var(--text-heading) !important; /* Heading color from theme */
+    font-weight: bold;
+  }
+
+  /* Body text */
+  .howto-card .v-card-text {
+    color: var(--text-primary) !important; /* Normal text color */
+  }
+
+  /* Close button */
+  .howto-card .v-btn {
+    color: var(--text-heading) !important; /* Button text matches heading color */
+  }
+
+  .v-btn:hover {
+  background-color: var(--btn-hover) !important;
+  }
+
+  /* ---------------------------------------------
+    FAVORITES DIALOG STYLING
+    Mirrors the same structure as How-To styles
+    --------------------------------------------- */
+
+  /* Favorites dialog main card */
+  .favorites-list {
+    background-color: var(--surface-card) !important; /* Theme-based background */
+    color: var(--text-primary) !important; /* Default text color */
+  }
+
+  /* Title */
+  .favorites-list .v-card-title {
+    color: var(--text-heading) !important; /* Heading color */
+    font-weight: bold;
+  }
+
+  /* List content text */
+  .favorites-list .v-card-text {
+    color: var(--text-primary) !important;
+  }
+
+  /* Text inside list */
+  .favorites-list .v-card-text {
+    color: var(--text-primary) !important;
+  }
+
+  /* Close button */
+  .favorites-list .remove {
+    background-color: var(--surface-card) !important;
+    color: var(--text-primary) !important; /* Button text matches heading color */
+  }
+</style>
