@@ -32,6 +32,8 @@
   --arrow-btn: #03416d;
 
   --btn-symbol-color: white;
+
+  --btn-hover: #78abcf;
 }
 
 /* --------------------------------
@@ -41,36 +43,38 @@
   /* ------------------------------
      Page Background Gradient (Dark)
      ------------------------------ */
-  --bg-gradient-top: #1a1d21;
-  --bg-gradient-bottom: #2b2f33;
+  --bg-gradient-top: #000000;
+  --bg-gradient-bottom: #5f4c72;
 
   /* ------------------------------
      Card / Content Background (Dark)
      ------------------------------ */
-  --surface-card: #2f3a45;
+  --surface-card: #252e36;
   --favorite-card: #1a1d21;
 
   /* ------------------------------
      Header Bar Colors (Dark)
      ------------------------------ */
-  --header-bg: #0f3a56;
-  --header-bg-dark: #082536;
+  --header-bg: #252e36;
+  --header-bg-dark: #08111a;
 
   /* ------------------------------
      Text Colors (Dark)
      ------------------------------ */
   --text-primary: #e6e6e6;
-  --text-heading: #90c4ff;
+  --text-heading: #B688ED;
 
   /* ------------------------------
      Button Colors (Dark)
      ------------------------------ */
   --favorite-btn: #000000;
-  --favorite-btn-active: red;
+  --favorite-btn-active: #5f4c72;
 
-  --arrow-btn: #000000;
+  --arrow-btn: #1a1d21;
 
   --btn-symbol-color: white;
+
+  --btn-hover: #1a1d21;
 }
 
 body,
@@ -90,92 +94,4 @@ html {
   max-width: 500px;
   margin: 0 auto;
   padding: 0 1rem;
-}
-
-/* ---------------------------------------------
-   HOW-TO DIALOG STYLING
-   Uses global theme colors (light / dark)
-   --------------------------------------------- */
-
-/* Main card background + text */
-.howto-card {
-  background-color: var(--surface-card) !important; /* Card background adapts to theme */
-  color: var(--text-primary) !important; /* Body text color adapts to theme */
-}
-
-/* Title style */
-.howto-card .v-card-title {
-  color: var(--text-heading) !important; /* Heading color from theme */
-  font-weight: bold;
-}
-
-/* Body text */
-.howto-card .v-card-text {
-  color: var(--text-primary) !important; /* Normal text color */
-}
-
-/* Close button */
-.howto-card .v-btn {
-  color: var(--text-heading) !important; /* Button text matches heading color */
-}
-
-/* ---------------------------------------------
-   FAVORITES DIALOG STYLING
-   Mirrors the same structure as How-To styles
-   --------------------------------------------- */
-
-/* Favorites dialog main card */
-.favorites-list {
-  background-color: var(--surface-card) !important; /* Theme-based background */
-  color: var(--text-primary) !important; /* Default text color */
-}
-
-/* Title */
-.favorites-list .v-card-title {
-  color: var(--text-heading) !important; /* Heading color */
-  font-weight: bold;
-}
-
-/* List content text */
-.favorites-list .v-card-text {
-  color: var(--text-primary) !important;
-}
-
-/* Text inside list */
-.favorites-list .v-card-text {
-  color: var(--text-primary) !important;
-}
-
-/* Close button */
-.favorites-list .remove {
-  background-color: var(--surface-card) !important;
-  color: var(--text-primary) !important; /* Button text matches heading color */
-}
-
-/* ---------------------------------------------
-   FAVORITE CARD (Single entry inside the list)
-   --------------------------------------------- */
-
-/* Card background and text color */
-.favorite-card {
-  background-color: var(--favorite-card) !important;
-}
-
-/* Digimon name text */
-.favorite-card strong {
-  color: var(--text-primary) !important; /* Emphasized heading color */
-}
-
-/* Optional: hover effect for better UX */
-.favorite-card:hover {
-  filter: brightness(1.05);
-  transition: 0.2s ease;
-}
-
-/* TABLET */
-@media (min-width: 600px) {
-}
-
-/* DESKTOP */
-@media (min-width: 900px) {
 }

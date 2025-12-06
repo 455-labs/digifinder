@@ -101,7 +101,6 @@ export default {
     <v-btn
       class="remove"
       icon
-      color="red"
       @click.stop="$emit('remove', digimon.id)"
     >
       <v-icon>mdi-trash-can-outline</v-icon>
@@ -127,6 +126,7 @@ export default {
   width: 100%;
   gap: 0.5rem;
   cursor: pointer;
+  background-color: var(--favorite-card) !important;
 }
 
 .favorite-card img {
@@ -138,10 +138,17 @@ export default {
 
 .favorite-card strong {
   font-size: 1rem;
+  color: var(--text-primary) !important;
 }
 
 .favorite-card .remove {
   margin-left: auto;
+  background-color: var(--favorite-card) !important;
+}
+
+.favorite-card:hover {
+  filter: brightness(0.90);
+  transition: 0.2s ease;
 }
 
 /* TABLET / DESKTOP */
@@ -161,6 +168,8 @@ export default {
 
   .favorite-card .remove {
     align-self: center;
+    background-color: var(--bg-gradient-bottom) !important;
+    color:  var(--text-primary)  !important;
   }
 }
 </style>

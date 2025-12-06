@@ -282,6 +282,10 @@ export default {
   color: var(--text-heading) !important;
 }
 
+.v-btn:hover {
+  background-color: var(--btn-hover) !important;
+}
+
 @media (max-width: 400px) {
   .favorites-scroll {
     max-height: 50vh;
