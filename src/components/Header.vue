@@ -33,9 +33,6 @@ export default {
     // - Set the <html> tag's "data-theme" attribute
     // - Persist the selected theme into localStorage
     //
-    // Future improvements:
-    // - Connect with a global theme manager
-    // - Integrate with Vuetify theme configuration
     // ---------------------------------------------------------
     const darkMode = ref(false)
 
