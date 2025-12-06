@@ -1,14 +1,16 @@
 <script>
-// SearchBar component: handles user-provided search queries
-// and emits events upward for the parent to handle.
-// This component does NOT communicate with the API directly —
-// it only collects user actions and passes them upward.
+// SearchBar component: Handles user-provided search input and
+// emits validated events upward to the parent component (Main.vue).
+// This component does not interact with the API directly; it only
+// processes user input and triggers search, random, and validation events.
+
 import { i18n } from '@/stores/translation'
 
 export default {
   name: 'SearchBar',
 
-  // Uses min/max indexes which are exported from src/components/Main.vue
+  // Props imported from Main.vue — represent the valid index range
+  // used for validating numeric search queries.
   props: {
     minId: Number,
     maxId: Number,
@@ -16,58 +18,74 @@ export default {
 
   data() {
     return {
+      // The raw text the user enters.
       query: '',
-      error: '', // Error message to UI
+      // Stores validation messages shown to the user.
+      error: '',
     }
   },
 
   methods: {
+    /**
+     * Validates the user's search input and emits the appropriate event.
+     * Supports two types of queries:
+     *  - Numeric ID searches
+     *  - Name-based searches
+     */
     searchDigimon() {
-      const value = this.query.trim();
-      this.error = '';
+      const value = this.query.trim()
+      this.error = ''
 
-      // 1) Search using id value, regex checks if every character is number
+      // ---------------------------------------------------------
+      // 1) Numeric search: check if the value contains only digits
+      // ---------------------------------------------------------
       if (/^\d+$/.test(value)) {
-        const num = Number(value);
+        const num = Number(value)
 
-      if (num < this.minId || num > this.maxId) {
-        this.error = `Index has to be between ${this.minId}-${this.maxId}.`;
+        // Ensure the numeric ID falls within the allowed range.
+        if (num < this.minId || num > this.maxId) {
+          this.error = `Index has to be between ${this.minId}-${this.maxId}.`
+          this.$emit('toast', this.error)
+          return
+        }
 
-        this.$emit('toast', this.error);
-        return;
+        // Valid numeric ID → emit search request upward.
+        this.$emit('search', num)
+        return
       }
 
-        // Valid numeric search to emits search to Main.vue
-        this.$emit('search', num);
-        return;
-      }
-
-      // 2) Search using name
+      // ---------------------------------------------------------
+      // 2) Name search: validate minimum and maximum length
+      // ---------------------------------------------------------
       if (value.length < 3) {
-        this.error = 'Minimum length for Digimon name is 3 characters.';
-        this.$emit('toast', this.error);
-        return;
+        this.error = 'Minimum length for Digimon name is 3 characters.'
+        this.$emit('toast', this.error)
+        return
       }
 
       if (value.length > 55) {
-        this.error = 'Maximum length for Digimon name is 55 characters.';
-        this.$emit('toast', this.error);
-        return;
+        this.error = 'Maximum length for Digimon name is 55 characters.'
+        this.$emit('toast', this.error)
+        return
       }
 
-      // Valid name to search that is emitted to Main.vue
-      this.$emit('search', value);
+      // Valid name → emit search event upward.
+      this.$emit('search', value)
     },
 
+    /**
+     * Emits a "random" event to request a random Digimon from the parent.
+     */
     randomDigimon() {
-      this.$emit('random');
+      this.$emit('random')
     },
   },
 
   setup() {
+    // Provides the translation store for UI text.
     return { i18n }
   }
-};
+}
 </script>
 
 <template>
