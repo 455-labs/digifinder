@@ -13,7 +13,6 @@
   "type": "Type:",
   "fields": "Fields:",
 
-
   "title": "How to use DigiFinder?",
   "searchTitle": "Search Digimons: ",
   "searchText": "Write a Digimon name or ID and press Search.",
@@ -36,5 +35,12 @@
   "fi": "🇫🇮 Finnish",
   "en": "🇬🇧 English",
 
-  "label": "Search Digimon..."
+  "label": "Search Digimon...",
+
+  "errorIndexRange": "Index has to be between {min}-{max}.",
+  "errorMinLength": "Minimum length for Digimon name is 3 characters.",
+  "errorMaxLength": "Maximum length for Digimon name is 55 characters.",
+  "errorNoInput": "Please enter a Digimon name",
+  "errorNotFound": "Digimon not found!",
+  "errorApi": "Unable to contact Digimon API"
 }

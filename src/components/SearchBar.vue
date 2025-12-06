@@ -44,8 +44,12 @@ export default {
 
         // Ensure the numeric ID falls within the allowed range.
         if (num < this.minId || num > this.maxId) {
-          this.error = `Index has to be between ${this.minId}-${this.maxId}.`
-          this.$emit('toast', this.error)
+          this.$emit(
+            'toast',
+            i18n.dict.errorIndexRange
+              .replace('{min}', this.minId)
+              .replace('{max}', this.maxId)
+            )
           return
         }
 
@@ -58,14 +62,12 @@ export default {
       // 2) Name search: validate minimum and maximum length
       // ---------------------------------------------------------
       if (value.length < 3) {
-        this.error = 'Minimum length for Digimon name is 3 characters.'
-        this.$emit('toast', this.error)
+        this.$emit('toast', i18n.dict.errorMinLength)
         return
       }
 
       if (value.length > 55) {
-        this.error = 'Maximum length for Digimon name is 55 characters.'
-        this.$emit('toast', this.error)
+        this.$emit('toast', i18n.dict.errorMaxLength)
         return
       }
 
