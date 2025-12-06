@@ -34,6 +34,11 @@
   --btn-symbol-color: white;
 
   --btn-hover: #78abcf;
+
+  /* -------------------------------
+     Logo
+     ------------------------------- */
+  --app-logo: url('@/assets/logos/logo-light.svg');
 }
 
 /* --------------------------------
@@ -75,6 +80,11 @@
   --btn-symbol-color: white;
 
   --btn-hover: #1a1d21;
+
+  /* -------------------------------
+    Logo
+    ------------------------------- */
+  --app-logo: url('@/assets/logos/logo-dark.svg');
 }
 
 body,
