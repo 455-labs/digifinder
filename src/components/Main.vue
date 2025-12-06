@@ -2,28 +2,29 @@
 // -------------------------------------------------------------
 // Main.vue
 // -------------------------------------------------------------
-// This component acts as the central controller of the app.
-// It connects the SearchBar, DisplayDigimon, and DigimonData
-// components together and manages all Digimon fetching logic.
+// Central controller component of the application. This component
+// coordinates all Digimon-related logic, including input handling,
+// data fetching, navigation, and image preloading.
 //
-// Responsibilities:
-// - Listen to search and random events from SearchBar
-// - Fetch Digimon data from DigiAPI
-// - Store the currently active Digimon in reactive state
-// - Load min/max Digimon ID range from the API
-// - Automatically fetch a random Digimon on page load
+// Key responsibilities:
+// - Receive and process search and random events from SearchBar.vue
+// - Fetch Digimon data from the DigiAPI helper functions
+// - Maintain the currently displayed Digimon's reactive state
+// - Determine and store the minimum/maximum valid Digimon IDs
+// - Automatically load a random Digimon when the page initializes
 // -------------------------------------------------------------
+
 import SearchBar from './SearchBar.vue'
 import DisplayDigimon from './DisplayDigimon.vue'
 import DigimonData from './DigimonData.vue'
 import { i18n } from '@/stores/translation'
 
-// Vue Composition API tools:
-// - ref(): creates reactive state values
-// - onMounted(): runs code when the component is first loaded
+// Vue Composition API utilities:
+// ref(): defines reactive values
+// onMounted(): runs once when the component is initially rendered
 import { ref, onMounted } from 'vue'
 
-// API helper functions (located in /src/api/digimonApi.js)
+// API helper utilities located in src/api/digimonApi.js
 import { fetchDigimon, fetchDigimonBounds } from '@/api/digimonApi.js'
 
 export default {
@@ -31,39 +32,49 @@ export default {
 
   setup(_, { emit }) {
     // -----------------------------------------------------------
-    // Reactive State
+    // Reactive State Values
     // -----------------------------------------------------------
 
-    // Currently visible Digimon object (full API response).
+    // Holds the currently active Digimon. Updated via API calls.
     const activeDigimon = ref(null)
 
-    // Minimum and maximum Digimon IDs available from the API.
-    // Used for random selection and next/previous navigation.
+    // Range of valid Digimon IDs, retrieved from DigiAPI.
     const minId = ref(null)
     const maxId = ref(null)
 
+    /**
+     * Emits a toast message upward to App.vue.
+     * @param {string} msg - The notification text.
+     */
     function toast(msg) {
-      emit('toast', msg);
+      emit('toast', msg)
     }
 
-    // Shared function that loads Digimon and preloads image
+    /**
+     * Fetches Digimon data and ensures the image is preloaded
+     * before updating the visible Digimon. Prevents UI flicker
+     * and ensures a smoother user experience.
+     *
+     * @param {string|number} idOrQuery - Digimon ID or name.
+     */
     async function loadDigimonWithPreload(idOrQuery) {
       try {
         const data = await fetchDigimon(idOrQuery)
 
         if (!data || !data.id) {
           emit('toast', 'Digimon not found!')
-          // activeDigimon.value = null
           return null
         }
 
         const imgUrl = data.images?.[0]?.href
 
+        // If no image is provided, update immediately.
         if (!imgUrl) {
           activeDigimon.value = data
           return data
         }
 
+        // Preload the image before updating state.
         await new Promise((resolve) => {
           const img = new Image()
           img.onload = resolve
@@ -82,8 +93,8 @@ export default {
     // -----------------------------------------------------------
     // Load Digimon ID Boundaries (min/max)
     // -----------------------------------------------------------
-    // Fetches the full Digimon list using a high pageSize, then
-    // determines the smallest and largest available ID numbers.
+    // Fetches the full ID range once on startup. Used later for
+    // random selection and next/previous navigation.
     async function loadBounds() {
       const bounds = await fetchDigimonBounds()
       minId.value = bounds.min
@@ -93,8 +104,7 @@ export default {
     // -----------------------------------------------------------
     // Handle Search Input
     // -----------------------------------------------------------
-    // Triggered when the SearchBar emits "search" with user input.
-    // Accepts both names and IDs because the API supports both.
+    // Resolves searches originating from SearchBar.vue.
     async function onSearch(query) {
       if (!query) {
         emit('toast', 'Please enter a Digimon name')
@@ -111,21 +121,23 @@ export default {
     // -----------------------------------------------------------
     // Fetch a Random Digimon
     // -----------------------------------------------------------
-    // Uses the ID range [minId, maxId] to pick a random Digimon.
+    // Uses the known ID range to generate a random valid ID.
     async function fetchRandomDigimon() {
       if (minId.value === null || maxId.value === null) {
         emit('toast', 'Unable to contact Digimon API')
         return
       }
 
-      const randomId = Math.floor(Math.random() * (maxId.value - minId.value + 1)) + minId.value
+      const randomId =
+        Math.floor(Math.random() * (maxId.value - minId.value + 1)) + minId.value
+
       await loadDigimonWithPreload(randomId)
     }
 
     // -----------------------------------------------------------
-    // Navigate to the next Digimon by ID
+    // Navigation: Show Next Digimon by ID
     // -----------------------------------------------------------
-    // If we go beyond maxId → wrap to minId.
+    // Wraps from max → min when reaching the end.
     async function showNextDigimon() {
       if (!activeDigimon.value) return
 
@@ -136,9 +148,9 @@ export default {
     }
 
     // -----------------------------------------------------------
-    // Navigate to the previous Digimon by ID
+    // Navigation: Show Previous Digimon by ID
     // -----------------------------------------------------------
-    // If we go below minId → wrap to maxId.
+    // Wraps from min → max when reaching the beginning.
     async function showPreviousDigimon() {
       if (!activeDigimon.value) return
 
@@ -149,17 +161,17 @@ export default {
     }
 
     // -----------------------------------------------------------
-    // Auto-run on page load
+    // Automatic Initialization on Page Load
     // -----------------------------------------------------------
-    // Fetch the ID boundaries first, then immediately load
-    // a random Digimon so the screen never starts empty.
+    // Loads the ID range, then immediately shows a random Digimon
+    // so the interface never begins in an empty state.
     onMounted(async () => {
       await loadBounds()
       await fetchRandomDigimon()
     })
 
     // -----------------------------------------------------------
-    // Exposed values to the template
+    // Exposed values and methods for template usage
     // -----------------------------------------------------------
     return {
       activeDigimon,
@@ -170,7 +182,7 @@ export default {
       showNextDigimon,
       showPreviousDigimon,
       toast,
-      i18n
+      i18n,
     }
   },
 }
