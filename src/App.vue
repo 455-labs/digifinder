@@ -1,10 +1,10 @@
 <script>
 // Importing the top-level layout components.
-// These represent the main structural sections of the application.
+// These components define the main structural sections of the application.
 import HeaderComponent from './components/Header.vue'
 import MainComponent from './components/Main.vue'
 import FooterComponent from './components/Footer.vue'
-import Toast from './components/Toast.vue';
+import Toast from './components/Toast.vue'
 import FavoritesDialog from './components/FavoritesDialog.vue'
 import { i18n } from '@/stores/translation'
 
@@ -21,33 +21,46 @@ export default {
 
   data() {
     return {
+      // Controls visibility of the toast notification.
       toastVisible: false,
+      // Message content shown inside the toast component.
       toastMessage: ''
-    };
+    }
   },
 
   methods: {
+    /**
+     * Displays a toast message for a fixed duration.
+     * @param {string} msg - The message to display in the toast.
+     */
     showToast(msg) {
-      this.toastMessage = msg;
-      this.toastVisible = true;
+      this.toastMessage = msg
+      this.toastVisible = true
 
+      // Automatically hides the toast after 2.5 seconds.
       setTimeout(() => {
-        this.toastVisible = false;
-      }, 2500);
+        this.toastVisible = false
+      }, 2500)
     },
 
+    /**
+     * Triggers a search in the Main component using the provided ID.
+     * This is used when a favorite item is selected from the dialog.
+     * @param {string|number} id - Identifier to load data for.
+     */
     loadFavorite(id) {
       this.$refs.main.onSearch(id)
     }
   },
 
   setup() {
-    // Shared state for the Help modal
+    // Shared state for toggling the Help dialog visibility.
     const howToDialog = ref(false)
-    // Shared state for the Favorites modal
+
+    // Shared state for toggling the Favorites dialog visibility.
     const favoritesDialog = ref(false)
 
-    // Expose to children via provide/inject OR event listeners
+    // Exposing reactive dialog states and translation store to the template.
     return { howToDialog, favoritesDialog, i18n }
   },
 }
@@ -56,20 +69,32 @@ export default {
 <template>
   <v-app>
   <div class="app">
-    <!-- Header triggers opening the dialog -->
+    <!-- Header component.
+         Emits:
+         - open-help: Opens the instructions dialog.
+         - open-favorites: Opens the favorites selection dialog.
+         - select-favorite: Triggers loading a specific favorite item.
+    -->
     <HeaderComponent
       @open-help="howToDialog = true"
       @open-favorites="favoritesDialog = true"
       @select-favorite="loadFavorite"
     />
 
-    <!-- Main content area -->
+    <!-- Main content section.
+         Emits:
+         - toast: Requests showing a user message.
+         Uses:
+         - ref 'main' to enable parent-to-child method calls.
+    -->
     <MainComponent @toast="showToast" ref="main" />
 
-    <!-- Footer -->
+    <!-- Footer section of the application. -->
     <FooterComponent />
 
-    <!-- How to dialog -->
+    <!-- Help / How-To dialog, displaying instructions to the user.
+         Content text is retrieved from the translation store.
+    -->
     <v-dialog v-model="howToDialog" max-width="500">
       <v-card class="howto-card">
         <v-card-title class="d-flex justify-space-between align-center">
@@ -84,17 +109,22 @@ export default {
         </v-card-text>
 
         <v-card-actions>
-          <v-btn color="primary" block @click="howToDialog = false"> {{ i18n.dict.close }}</v-btn>
+          <v-btn color="primary" block @click="howToDialog = false">
+            {{ i18n.dict.close }}
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
 
-    <!-- FAVORITES -->
+    <!-- Favorites dialog allowing users to select and load previously
+         saved items. Emits a 'select' event with the chosen item's ID.
+    -->
     <FavoritesDialog
       v-model="favoritesDialog"
       @select="loadFavorite"
     />
 
+    <!-- Toast component used for temporary notifications. -->
     <Toast :message="toastMessage" :visible="toastVisible" />
   </div>
   </v-app>
