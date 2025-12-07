@@ -10,6 +10,7 @@ The application was created collaboratively by Helmi Haapasaari, Pirjo Keskinen,
 
 - [RETROSPECTIVE](#retrospective)
   - [Table of Contents](#table-of-contents)
+  - [Team Collaboration and Workflow](#team-collaboration-and-workflow)
   - [Core Idea](#core-idea)
   - [Choosing the Framework](#choosing-the-framework)
   - [Visual Design](#visual-design)
@@ -22,6 +23,14 @@ The application was created collaboratively by Helmi Haapasaari, Pirjo Keskinen,
   - [Testing](#testing)
   - [Future Development](#future-development)
   - [Conclusion](#conclusion)
+
+## Team Collaboration and Workflow
+
+The team collaborated actively throughout the project using **Discord** and **WhatsApp** for communication. Regular meetings were held to discuss progress, divide tasks, and solve emerging challenges together.
+
+**GitHub** was used for version control, enabling team members to work on separate branches and merge changes through pull requests. Development progress was tracked using a shared to-do list, which was updated continuously as the project evolved.
+
+To maintain a clean and professional commit history, the team agreed on a unified commit message guideline. This helped keep the repository organized and made it easier to follow the development process over time.
 
 ## Core Idea
 
