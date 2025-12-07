@@ -19,6 +19,7 @@ The application was created collaboratively by Helmi Haapasaari, Pirjo Keskinen,
     - [Possible Security Improvements](#possible-security-improvements)
   - [Experimental and Planned Features Not Included in the Final Version](#experimental-and-planned-features-not-included-in-the-final-version)
   - [Issues Encountered](#issues-encountered)
+  - [Testing](#testing)
   - [Future Development](#future-development)
   - [Conclusion](#conclusion)
 
@@ -170,6 +171,12 @@ First, the **DigiAPI** database contains inconsistencies and incorrect data. Dur
 The data provided by the API is also uneven in quality: not all Digimon entries include the same fields, and some images vary significantly in size. This inconsistency occasionally breaks the visual consistency of the **DigiFinder** interface, as certain Digimon images do not align with the intended layout.
 
 Although the application was designed with the expectation that the API's database may be updated over time, various issues, such as empty or missing indexes, can still cause DigiFinder to behave unpredictably or fail to load certain entries properly.
+
+## Testing
+
+Most testing during development was performed manually by the team. Team members regularly explored different parts of the application, and the group also asked friends to try the app and give feedback on usability and potential issues.
+
+A small experiment with automated testing was conducted using simple **Node.js** `assert`-based unit tests, but automated testing was not extensively implemented in this project.
 
 ## Future Development
 
