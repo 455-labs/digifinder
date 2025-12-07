@@ -62,7 +62,7 @@ export default {
         const data = await fetchDigimon(idOrQuery)
 
         if (!data || !data.id) {
-          emit('toast', 'Digimon not found!')
+          emit('toast', i18n.dict.errorNotFound)
           return null
         }
 
@@ -85,7 +85,7 @@ export default {
         return data
 
       } catch (err) {
-        emit('toast', 'Unable to contact Digimon API')
+        emit('toast', i18n.dict.errorApi)
         return null
       }
     }
@@ -107,14 +107,14 @@ export default {
     // Resolves searches originating from SearchBar.vue.
     async function onSearch(query) {
       if (!query) {
-        emit('toast', 'Please enter a Digimon name')
+        emit('toast', i18n.dict.errorNoInput)
         return
       }
 
       const result = await loadDigimonWithPreload(query)
 
       if (!result) {
-        emit('toast', 'Digimon not found!')
+        emit('toast', i18n.dict.errorNotFound)
       }
     }
 
@@ -124,7 +124,7 @@ export default {
     // Uses the known ID range to generate a random valid ID.
     async function fetchRandomDigimon() {
       if (minId.value === null || maxId.value === null) {
-        emit('toast', 'Unable to contact Digimon API')
+        emit('toast', i18n.dict.errorApi)
         return
       }
 

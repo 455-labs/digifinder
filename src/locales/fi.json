@@ -13,7 +13,6 @@
   "type": "Tyyppi:",
   "fields": "Kentät:",
 
-
   "title": "Kuinka käyttää DigiFinderia?",
   "searchTitle": "Etsi Digimoneja: ",
   "searchText": "Kirjoita Digimonin nimi tai tunnus ja paina 'Hae'.",
@@ -36,5 +35,12 @@
   "fi": "🇫🇮 Suomi",
   "en": "🇬🇧 Englanti",
 
-  "label": "Etsi Digimonia..."
+  "label": "Etsi Digimonia...",
+
+  "errorIndexRange": "Tunnuksen täytyy olla välillä {min}–{max}.",
+  "errorMinLength": "Digimonin nimen minimipituus on 3 merkkiä.",
+  "errorMaxLength": "Digimonin nimen maksimipituus on 55 merkkiä.",
+  "errorNoInput": "Syötä Digimonin nimi",
+  "errorNotFound": "Digimonia ei löytynyt!",
+  "errorApi": "Digimon-rajapintaan ei saatu yhteyttä"
 }

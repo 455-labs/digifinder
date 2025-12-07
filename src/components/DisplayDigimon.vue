@@ -1,16 +1,29 @@
 <script>
-// Component responsible for displaying the selected Digimon's image
-// and providing user interactions such as marking it as a favorite
-// or navigating between Digimon entries.
+// ---------------------------------------------------------
+// DisplayDigimon.vue
+// ---------------------------------------------------------
+// This component displays the currently selected Digimon's image,
+// provides navigation controls (previous/next), and allows the user
+// to add or remove the Digimon from their favorites.
+//
+// The component supports:
+// - Displaying the Digimon image passed through props
+// - Toggling the "favorite" status for the active Digimon
+// - Synchronizing favorite status across the entire application
+// - Emitting navigation events for parent-level control
+// ---------------------------------------------------------
+
 import { i18n } from '@/stores/translation'
 
 export default {
   name: 'DisplayDigimon',
 
-  // Events emitted to the parent
+  // Events emitted to the parent (e.g., App.vue or container)
   emits: ['prev', 'next'],
 
-  // Image URL, id Number passed from the parent component
+  // Props received from parent:
+  // - img: URL of the Digimon image
+  // - id: numerical Digimon identifier
   props: {
     img: String,
     id: Number,
@@ -18,13 +31,16 @@ export default {
 
   data() {
     return {
-      // Array containing favorite digimons as array
+      // List of IDs corresponding to Digimon marked as favorites
+      // by the user. This list is loaded from localStorage.
       favoriteDigimons: [],
     }
   },
 
   created() {
-    // Loads favorites from local storage
+    // Load any previously saved favorites from localStorage.
+    // This ensures that the component initializes with the
+    // correct persisted favorite state.
     const saved = localStorage.getItem("favoriteDigimons")
     if (saved) {
       this.favoriteDigimons = JSON.parse(saved)
@@ -32,38 +48,53 @@ export default {
   },
 
   mounted() {
-    // Listen for "favorite-updated" events from anywhere in the app
+    // Listen for a "favorite-updated" event broadcast globally.
+    // This ensures that if another component modifies the favorites
+    // list, this component stays synchronized.
     window.addEventListener("favorite-updated", this.syncFavorites)
   },
 
   beforeUnmount() {
+    // Remove the global event listener to prevent memory leaks.
     window.removeEventListener("favorite-updated", this.syncFavorites)
   },
 
   methods: {
-    // Toggles the favorite icon state
+    // ---------------------------------------------------------
+    // TOGGLE FAVORITE
+    // ---------------------------------------------------------
+    // Adds or removes the current Digimon (this.id) from the local
+    // favorites list. This method:
+    // - updates the internal array
+    // - persists changes to localStorage
+    // - broadcasts a global update event
+    // ---------------------------------------------------------
     toggleFavorite() {
       if (this.favoriteDigimons.includes(this.id)) {
-        // Removes digimon from favourise
+        // Remove from favorites by filtering the ID out
         this.favoriteDigimons = this.favoriteDigimons.filter(
           digimonId => digimonId !== this.id
         )
         console.log("Removed from favorites!")
       } else {
-        // Adds digimon to favourites
+        // Add the ID to favorites
         this.favoriteDigimons.push(this.id)
         console.log("Added to favorites!")
       }
 
-      // Updates local storage
+      // Save the updated favorites list to localStorage
       localStorage.setItem(
         "favoriteDigimons",
         JSON.stringify(this.favoriteDigimons)
       )
 
+      // Notify other components that the favorites list has changed
       window.dispatchEvent(new Event("favorite-updated"))
     },
 
+    // Synchronizes the local favorites list with the value stored
+    // in localStorage. This is called when another component updates
+    // the global favorites list.
     syncFavorites() {
       const saved = localStorage.getItem("favoriteDigimons")
       this.favoriteDigimons = saved ? JSON.parse(saved) : []
@@ -71,13 +102,16 @@ export default {
   },
 
   computed: {
-    // Computed property checks always if digimon is in favorites
+    // Returns true if the currently displayed Digimon is part of
+    // the user's favorites. The computed property keeps the UI
+    // in sync with the favorites list.
     isFavorite() {
       return this.favoriteDigimons.includes(this.id)
     }
   },
 
   setup() {
+    // Expose the translation store inside the template.
     return { i18n }
   }
 }

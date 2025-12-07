@@ -2,18 +2,17 @@
 // ---------------------------------------------------------
 // HeaderComponent.vue
 // ---------------------------------------------------------
-// The main top bar of the application.
-// This component is responsible for displaying:
+// This component implements the main top header of the application.
+// It is responsible for rendering:
 //
-// - The application logo (centered)
-// - Left-side tools (Favorites)
-// - Right-side tools (Help, Dark Mode toggle, Language menu)
+// - The centered application logo
+// - Left-side action buttons ( Help, Favorites)
+// - Right-side action buttons ( Dark Mode, Language Menu)
 //
-// This component currently contains only UI logic and placeholder
-// functions. Real behavior — such as persisting dark mode or
-// localization — will be implemented later.
+// The component also manages user-interface related state, such as
+// dark mode, language selection, and the mobile navigation menu.
 //
-// Uses Vue's Composition API for state management.
+// This component uses the Vue Composition API.
 // ---------------------------------------------------------
 
 import { ref, onMounted } from 'vue'
@@ -24,16 +23,16 @@ export default {
 
   setup(_, { emit }) {
     // ---------------------------------------------------------
-    // DARK MODE (placeholder)
+    // DARK MODE TOGGLE
     // ---------------------------------------------------------
-    // "darkMode" keeps track of whether the app is currently in dark
-    // or light mode. The actual theme-switching logic is not yet
-    // implemented — at the moment we only log the value.
+    // `darkMode` tracks whether the UI is currently in dark or light
+    // mode.
     //
-    // Later improvements:
-    // - Store this value in localStorage
-    // - Apply a CSS class to <body>
-    // - Update Vuetify theme dynamically
+    // Responsibilities:
+    // - Update the local state
+    // - Set the <html> tag's "data-theme" attribute
+    // - Persist the selected theme into localStorage
+    //
     // ---------------------------------------------------------
     const darkMode = ref(false)
 
@@ -47,6 +46,7 @@ export default {
     }
 
     onMounted(() => {
+      // Load previously stored dark mode preference, if any.
       const saved = localStorage.getItem('darkMode')
 
       if (saved === 'dark') {
@@ -59,12 +59,16 @@ export default {
     })
 
     // ---------------------------------------------------------
-    // LANGUAGE SELECTION (placeholder)
+    // LANGUAGE SELECTION
     // ---------------------------------------------------------
-    // Stores the currently selected language.
-    // Later:
-    // - Save preference to localStorage
-    // - Integrate real translation system (i18n)
+    // Manages the currently active application language.
+    //
+    // Notes:
+    // - Uses the global i18n store to track the selected language
+    // - User language preference is already persisted to localStorage
+    //   via the translation store (translation.js)
+    // - Changing the language updates the active dictionary and affects
+    //   all UI translations across the application
     // ---------------------------------------------------------
     const language = ref(i18n.lang)
 
@@ -74,35 +78,37 @@ export default {
     }
 
     // ---------------------------------------------------------
-    // FAVORITES SCREEN
+    // FAVORITES DIALOG CONTROL
     // ---------------------------------------------------------
-    // Opens the Favorites dialog in App.vue via an emitted event.
-    // The dialog displays a scrollable list of saved Digimon,
-    // allowing users to view, select, or remove favorites.
+    // Emits an event to the parent component (App.vue) requesting that
+    // the Favorites dialog be opened. The dialog itself is managed in
+    // the parent, not here.
     // ---------------------------------------------------------
     function openFavorites() {
       emit('open-favorites')
     }
 
     // ---------------------------------------------------------
-    // HELP / HOW-TO SCREEN (placeholder)
+    // HELP SCREEN CONTROL (placeholder)
     // ---------------------------------------------------------
-    // In the future this will open a modal or a dedicated help page.
+    // Emits an event to open a help or instructions modal. The actual
+    // help system will be implemented later.
     // ---------------------------------------------------------
     function openHelp() {
       emit('open-help')
     }
 
     // ---------------------------------------------------------
-    // NAVIGATION BUTTON FOR MOBILE
+    // MOBILE NAVIGATION MENU
     // ---------------------------------------------------------
-    // Header buttons move below the navigation button when
-    // the device width is less than 600 px.
+    // Controls whether the mobile menu is expanded or collapsed.
+    // When the viewport is narrower than 600px, header actions are
+    // displayed inside this mobile navigation panel.
     // ---------------------------------------------------------
     const mobileMenu = ref(false)
 
     // ---------------------------------------------------------
-    // Expose everything to the template
+    // Expose state and methods to the template
     // ---------------------------------------------------------
     return {
       darkMode,
@@ -117,6 +123,7 @@ export default {
   },
 }
 </script>
+
 
 <template>
   <!--
