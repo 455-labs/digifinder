@@ -17,6 +17,9 @@ This document explains the basic architecture, component structure, and overall 
     - [`ref` - Creates a reactive variable](#ref---creates-a-reactive-variable)
     - [`onMounted()` — Vue’s Lifecycle Hook](#onmounted--vues-lifecycle-hook)
     - [`watch()` — Vue’s Reactive Watcher](#watch--vues-reactive-watcher)
+    - [`created()` — Options API Lifecycle Hook](#created--options-api-lifecycle-hook)
+    - [`beforeUnmount()` — Options API Lifecycle Hook](#beforeunmount--options-api-lifecycle-hook)
+    - [`computed()` - A special type of reactive value in Vue](#computed---a-special-type-of-reactive-value-in-vue)
   - [Overview: How the Application Works](#overview-how-the-application-works)
   - [Data Flow](#data-flow)
   - [Summary](#summary)
@@ -259,6 +262,43 @@ The actual value of a ref object is stored in its `.value` property.
 `watch()` tracks reactive values and executes custom logic every time those values change. It allows a component to react dynamically to external state updates.
 
 [Vue: watch()](https://vuejs.org/api/reactivity-core.html#watch)
+
+### `created()` — Options API Lifecycle Hook
+
+`created()` is a Vue lifecycle hook that runs immediately after the component instance is created, but before the DOM is rendered.
+
+It is useful for initializing data, loading values from localStorage, or performing setup tasks that do not require access to the component’s DOM elements.
+
+Example from the project:
+
+- The component loads the user’s saved favorites from localStorage as soon as it is created.
+
+[Vue: created()](https://vuejs.org/api/options-lifecycle.html#created)
+
+### `beforeUnmount()` — Options API Lifecycle Hook
+
+`beforeUnmount()` is executed right before the component is removed from the DOM.
+
+This hook is typically used for cleanup tasks such as removing event listeners, cancelling intervals, or clearing timers, helping prevent memory leaks.
+
+Example from the project:
+
+- The component removes its favorite-updated event listener before it is destroyed.
+
+[Vue: beforeUnmount()](https://vuejs.org/api/options-lifecycle.html#beforeunmount)
+
+### `computed()` - A special type of reactive value in Vue
+
+`computed()` behaves like a function, but Vue caches its result and only recalculates it when the data it depends on changes.
+
+So:
+
+- It looks like a function → isFavorite()
+- But you use it like a variable → isFavorite
+
+This makes computed properties perfect for derived data — values that depend on other reactive values.
+
+[Vue: computed()](https://vuejs.org/api/reactivity-core.html#computed)
 
 ## Overview: How the Application Works
 
