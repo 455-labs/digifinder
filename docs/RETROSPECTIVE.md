@@ -11,6 +11,7 @@ The application was created collaboratively by Helmi Haapasaari, Pirjo Keskinen,
 - [RETROSPECTIVE](#retrospective)
   - [Table of Contents](#table-of-contents)
   - [Team Collaboration and Workflow](#team-collaboration-and-workflow)
+  - [Individual Contributions](#individual-contributions)
   - [Core Idea](#core-idea)
   - [Choosing the Framework](#choosing-the-framework)
   - [Visual Design](#visual-design)
@@ -31,6 +32,24 @@ The team collaborated actively throughout the project using **Discord** and **Wh
 **GitHub** was used for version control, enabling team members to work on separate branches and merge changes through pull requests. Development progress was tracked using a shared to-do list, which was updated continuously as the project evolved.
 
 To maintain a clean and professional commit history, the team agreed on a unified commit message guideline. This helped keep the repository organized and made it easier to follow the development process over time.
+
+## Individual Contributions
+
+### Dark Mode
+
+Implemented a theme-aware dark mode using CSS variables and Vuetify theming. The goal was to improve visual comfort in low-light enviroments and ensure consistent styling across all components.
+
+### Tooltips
+
+Added tooltips to interactive elements such as buttons and icons to improve usability and clarity, especially for first-time users. Tooltips provide contextual hints without cluttering the UI.
+
+### Mobile-First Design
+
+Focused on a mobile-first approach throughout the layout and styling process. Components were initially designed for smaller screens and progressivey enhanced for tablet and desktop views using media queries.
+
+### Mobile Hamburger Menu
+
+As part of the mobile-first design, header action buttons were moved under a hamburger menu on small screens. During the planning phase, it was identified that displaying multiple action buttons directly in the header was not intuitive on mobile devices. Grouping these actions into a hamburger menu improved usability, clarity and touch accessibility on phones.
 
 ## Core Idea
 
@@ -98,43 +117,35 @@ Even though **DigiFinder** does not handle sensitive information, applying these
 
   When the app is built and deployed, it should be served over HTTPS rather than plain HTTP.
   HTTPS encrypts all communication between the user’s browser and the server, preventing:
-
   - eavesdropping
   - data manipulation
   - man-in-the-middle attacks
 
   Today, HTTPS is considered the minimum security requirement for any publicly available web application.
-
   - **How HTTPS is typically enabled**
 
     Enabling HTTPS depends on the hosting environment, but the process is generally similar:
-
     1. Obtain an SSL/TLS certificate
-
-        - Most projects use a free certificate from Let’s Encrypt.
-        - Many hosting providers (**Vercel**, **Netlify**, **GitHub Pages**, **Firebase**, **Render**, etc.) offer automatic certificates with zero configuration.
+       - Most projects use a free certificate from Let’s Encrypt.
+       - Many hosting providers (**Vercel**, **Netlify**, **GitHub Pages**, **Firebase**, **Render**, etc.) offer automatic certificates with zero configuration.
 
     2. Configure the web server
+       - If the app is hosted on a VPS or dedicated server, you configure HTTPS in a web server such as:
 
-        - If the app is hosted on a VPS or dedicated server, you configure HTTPS in a web server such as:
-
-        - Nginx: using the ssl_certificate and ssl_certificate_key settings
-        - Apache: using the SSLEngine on directive
+       - Nginx: using the ssl_certificate and ssl_certificate_key settings
+       - Apache: using the SSLEngine on directive
 
     3. Force redirect from HTTP → HTTPS
-
-        - Users accessing `http://example.com` are automatically redirected to `https://example.com`.
+       - Users accessing `http://example.com` are automatically redirected to `https://example.com`.
 
     4. Renew certificates automatically
-
-        - Let’s Encrypt certificates expire every 90 days, so automatic renewal is recommended.
+       - Let’s Encrypt certificates expire every 90 days, so automatic renewal is recommended.
 
     Most modern hosting platforms automate all of this, so enabling HTTPS is usually as simple as turning on a toggle or it is enabled by default.
 
 - **Implement rate limiting on API requests**
 
   If the application communicates with the DigiAPI through a backend proxy (in future development), rate limiting could:
-
   - prevent abuse
   - protect the API from overload
   - avoid denial-of-service style request floods
@@ -146,11 +157,10 @@ Even though **DigiFinder** does not handle sensitive information, applying these
   Since the app uses **Vue**, **Vuetify**, **Axios**, and other libraries, outdated dependencies can introduce vulnerabilities.
 
   Tools like:
-
   - **npm audit**
   - **Snyk**
   - **GitHub Dependabot**
-  
+
   can automatically detect and report known security issues.
 
 ## Experimental and Planned Features Not Included in the Final Version
@@ -159,17 +169,17 @@ Although the team successfully implemented most of the features planned for **Di
 
 - **Autocomplete**
 
-    One of the features developed late in the project was an autocomplete function for the search bar, which would suggest possible Digimon names based on the user’s input. However, this feature introduced several issues that became too time-consuming to fix near the end of the course.
+  One of the features developed late in the project was an autocomplete function for the search bar, which would suggest possible Digimon names based on the user’s input. However, this feature introduced several issues that became too time-consuming to fix near the end of the course.
 
-    The autocomplete system interfered with error handling, and the existing validation logic would have needed to be redesigned, since it would make little sense to allow invalid input if the application already knows all valid Digimon names. For these reasons, the feature was removed from the final presentation version.
+  The autocomplete system interfered with error handling, and the existing validation logic would have needed to be redesigned, since it would make little sense to allow invalid input if the application already knows all valid Digimon names. For these reasons, the feature was removed from the final presentation version.
 
 - **Additional Color Themes**
 
-    Some initial plans were made to include multiple color themes in the application. However, the team ultimately decided to limit the app to just two themes—light mode and dark mode. Designing additional themes would have required a significant amount of time, especially if each theme were to be properly tested and validated using a contrast checker to ensure accessibility compliance.
+  Some initial plans were made to include multiple color themes in the application. However, the team ultimately decided to limit the app to just two themes—light mode and dark mode. Designing additional themes would have required a significant amount of time, especially if each theme were to be properly tested and validated using a contrast checker to ensure accessibility compliance.
 
 - **More Language Options**
 
-    Additional language options were planned, and the corresponding JSON files were prepared in advance. However, the team did not have sufficient time to implement the necessary UI updates to fully support multiple additional languages beyond Finnish and English.
+  Additional language options were planned, and the corresponding JSON files were prepared in advance. However, the team did not have sufficient time to implement the necessary UI updates to fully support multiple additional languages beyond Finnish and English.
 
 ## Issues Encountered
 
@@ -196,8 +206,8 @@ Introducing a backend would also require several important security consideratio
 - **Secure user authentication** (e.g., hashed passwords, token-based sessions)
 - **Protection of user data** through proper authorization checks
 - **Input validation and sanitization** on the server side
-- **Rate limiting and request throttling**  to prevent abuse
-- **HTTPS enforcement**  to protect data transmitted between client and server
+- **Rate limiting and request throttling** to prevent abuse
+- **HTTPS enforcement** to protect data transmitted between client and server
 - **Secure storage practices** , ensuring no sensitive data is stored in plaintext
 
 The team also initially discussed adding a Digimon battle game mode, where users could battle using data retrieved from the **DigiAPI**. This concept was ultimately not implemented due to time constraints.
