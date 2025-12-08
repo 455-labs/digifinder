@@ -58,7 +58,7 @@ During this project, the team aimed to experiment with and implement a variety o
 - **Tooltips**, added tooltips to interactive elements such as buttons and icons to improve usability and clarity, especially for first-time users. Tooltips provide contextual hints without cluttering the UI.
 - **Mobile-First Design**, focused on a mobile-first approach throughout the layout and styling process. Components were initially designed for smaller screens and progressivey enhanced for tablet and desktop views using media queries.
 - **Mobile Hamburger Menu**, as part of the mobile-first design, header action buttons were moved under a hamburger menu on small screens. During the planning phase, it was identified that displaying multiple action buttons directly in the header was not intuitive on mobile devices. Grouping these actions into a hamburger menu improved usability, clarity and touch accessibility on phones.
-- **Image preload**, preloads Digimon images before dispalying them, preventing UI flicker and ensurinf smooth transitions.
+- **Image preload**, preloads Digimon images before dispalying them, preventing UI flicker and ensuring smooth transitions.
 
 ## Choosing the Framework
 
