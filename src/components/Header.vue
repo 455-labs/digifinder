@@ -264,6 +264,11 @@ export default {
   border-bottom: 1px solid #000;
 }
 
+/*
+  Inner container:
+  - Holds left, center and right sections
+  - Uses flexbox for horizontal alignment
+*/
 .container {
   display: flex;
   gap: 1.5rem;
@@ -274,6 +279,11 @@ export default {
 /* ---------------------------------------------------------
    CENTER LOGO STYLE
 --------------------------------------------------------- */
+/*
+  Application logo:
+  - Rendered as a background image for flexible theming
+  - Text is visually hidden for accessibility/layout reasons
+*/
 .logo {
   width: 285px;
   height: 30px;
@@ -283,7 +293,9 @@ export default {
   background-position: center;
   background-size: contain;
 
-  /* Poista tekstityyli */
+  /*
+    Hide text visually while keeping element structure clean
+  */
   font-size: 0;
 }
 
@@ -311,7 +323,9 @@ export default {
   gap: 0.75rem;
 }
 
-/* Optional helpers for clarity */
+/*
+  Alignment helpers for lefy/right sections
+*/
 .side.left {
   justify-content: flex-start;
 }
@@ -320,11 +334,22 @@ export default {
   justify-content: flex-end;
 }
 
-/* Navigation button */
+/* ---------------------------------------------------------
+   MOBILE NAVIGATION
+--------------------------------------------------------- */
+/*
+  Hamburger menu button:
+  - Hidden on desktop
+  - Shown only on small screens
+*/
 .hamburger {
   display: none;
 }
 
+/*
+  Mobile navigation drawer styles:
+  - Separate themes for light and dark mode
+*/
 .mobile-drawer-light {
   background-color: var(--surface-card);
   color: var(--text-primary);
@@ -335,17 +360,30 @@ export default {
   color: #f5f5f5;
 }
 
-/* MOBILE FIRST */
+/* ---------------------------------------------------------
+   MOBILE-FIRST RESPONSIVE BEHAVIOR
+--------------------------------------------------------- */
 @media (max-width: 600px) {
+  /*
+    Hide desktop-only elements on small screen
+  */
   .desktop-only {
     display: none;
   }
 
+  /*
+    Smaller header layout for mobile:
+    - Uses absolute positioning for precise alignment
+  */
   .container {
     position: relative;
     height: 48px;
   }
 
+  /*
+    Hamburger button placement:
+    - Positioned to the right side of the header
+  */
   .hamburger {
     display: inline-flex;
     position: absolute;
@@ -355,6 +393,10 @@ export default {
     z-index: 10;
   }
 
+  /*
+    Centered logo overlay:
+    - Stays visually centered even with mobile controls
+  */
   .center {
     position: absolute;
     left: 50%;

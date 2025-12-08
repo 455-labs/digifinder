@@ -169,6 +169,12 @@ export default {
 </template>
 
 <style scoped>
+/*
+  Digimon display card:
+  - Main container for image and controls
+  - Uses flexible layout for responsive design
+  - Styled as a themed card with shadow and rounded corners
+*/
 .digimon-card {
   display: flex;
   flex-direction: column;
@@ -183,6 +189,11 @@ export default {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
+/*
+  Digimon image:
+  - Keeps original aspect ratio
+  - Scales responsively within the card
+*/
 .digimon-img {
   margin: 1rem;
   object-fit: contain;
@@ -191,6 +202,11 @@ export default {
   height: auto;
 }
 
+/*
+  Button container:
+  - Holds favorite and navigation buttons
+  - Layout changes based on screen size
+*/
 .button-column {
   display: flex;
   flex-direction: row;
@@ -199,6 +215,10 @@ export default {
   gap: 1rem;
 }
 
+/*
+  Favorite button styling:
+  - Visual distinction between active and inactive states
+*/
 .favorite-btn {
   background-color: var(--favorite-btn) !important;
   color: var(--btn-symbol-color) !important;
@@ -209,12 +229,19 @@ export default {
   color: var(--btn-symbol-color) !important;
 }
 
+/*
+  Navigation buttons (previous / next)
+*/
 .circle-btn {
   background-color: var(--arrow-btn) !important;
   color: var(--btn-symbol-color) !important;
 }
 
-/* MOBILE-FIRST */
+/*
+  Responsive adjustments (mobile-first)
+  - Switches card layout to horizontal
+  - Stacks action buttons vertically
+*/
 @media (min-width: 600px) {
   .digimon-card {
     flex-direction: row;

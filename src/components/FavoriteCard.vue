@@ -123,6 +123,11 @@ export default {
 </template>
 
 <style scoped>
+/*
+  Favorite container:
+  - Vertical list on mobile for easy scrolling
+  - Provides spacing between favorite items
+*/
 .favorites-container {
   display: flex;
   flex-direction: column;
@@ -131,6 +136,12 @@ export default {
   padding: +.5rem;
 }
 
+/*
+  Individual favorite card:
+  - Displays a Digimon preview (image + name)
+  - Fully clickable to allow quick selection
+  - Uses flex layout for clean horizontal alignment
+*/
 .favorite-card {
   display: flex;
   flex-direction: row;
@@ -143,6 +154,11 @@ export default {
   background-color: var(--favorite-card) !important;
 }
 
+/*
+  Thumbnail image inside favorite card:
+  - Fixed size for consistent layout
+  - Keeps original aspect ratio
+*/
 .favorite-card img {
   width: 60px;
   height: 60px;
@@ -150,22 +166,37 @@ export default {
   margin-right: 0.5rem;
 }
 
+/*
+  Favorite item name styling:
+  - Clear and readable text
+*/
 .favorite-card strong {
   font-size: 1rem;
   color: var(--text-primary) !important;
 }
-
+/*
+  Remove button:
+  - Pushed to the right edge using flexbox
+*/
 .favorite-card .remove {
   margin-left: auto;
   background-color: var(--favorite-card) !important;
 }
 
+/*
+  Hover effect:
+  - Subtle visual feedback on interaction
+*/
 .favorite-card:hover {
   filter: brightness(0.90);
   transition: 0.2s ease;
 }
 
-/* TABLET / DESKTOP */
+/*
+  Responsive layout (mobile-first):
+  - Displays favorites in a wrapper grid layout
+  - Enchances button visibility on larger screens
+*/
 @media (min-width: 600px) {
   .favorites-container {
     flex-direction: row;
