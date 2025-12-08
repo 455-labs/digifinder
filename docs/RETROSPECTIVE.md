@@ -11,8 +11,8 @@ The application was created collaboratively by Helmi Haapasaari, Pirjo Keskinen,
 - [RETROSPECTIVE](#retrospective)
   - [Table of Contents](#table-of-contents)
   - [Team Collaboration and Workflow](#team-collaboration-and-workflow)
-  - [Individual Contributions](#individual-contributions)
   - [Core Idea](#core-idea)
+  - [Additional Features](#additional-features)
   - [Choosing the Framework](#choosing-the-framework)
   - [Visual Design](#visual-design)
   - [Usability and Accessibility](#usability-and-accessibility)
@@ -33,24 +33,6 @@ The team collaborated actively throughout the project using **Discord** and **Wh
 
 To maintain a clean and professional commit history, the team agreed on a unified commit message guideline. This helped keep the repository organized and made it easier to follow the development process over time.
 
-## Individual Contributions
-
-### Dark Mode
-
-Implemented a theme-aware dark mode using CSS variables and Vuetify theming. The goal was to improve visual comfort in low-light enviroments and ensure consistent styling across all components.
-
-### Tooltips
-
-Added tooltips to interactive elements such as buttons and icons to improve usability and clarity, especially for first-time users. Tooltips provide contextual hints without cluttering the UI.
-
-### Mobile-First Design
-
-Focused on a mobile-first approach throughout the layout and styling process. Components were initially designed for smaller screens and progressivey enhanced for tablet and desktop views using media queries.
-
-### Mobile Hamburger Menu
-
-As part of the mobile-first design, header action buttons were moved under a hamburger menu on small screens. During the planning phase, it was identified that displaying multiple action buttons directly in the header was not intuitive on mobile devices. Grouping these actions into a hamburger menu improved usability, clarity and touch accessibility on phones.
-
 ## Core Idea
 
 As part of the course requirements, the application had to utilize an external API.
@@ -58,6 +40,25 @@ As part of the course requirements, the application had to utilize an external A
 Our original plan was to use the [PokéAPI](https://pokeapi.co/), but after realizing that many other groups had selected the same interface, we decided to differentiate our project by choosing the [DigiAPI](https://digi-api.com/) instead.
 
 The core idea of the application is to allow the user to search for and view detailed information about any Digimon using our custom interface.
+
+## Additional Features
+
+During this project, the team aimed to experiment with and implement a variety of modern UI and UX features. Each feature was designed to improve usability, interactivity, and overall user experience.
+
+- **Search Digimon by name or ID**, allows users to quickly find a specific Digimon by typing either its name or numeric ID. Input is validated before sending search requests to prevent errors.
+- **Browse Digimon by ID**, provides sequential navigation through Digimon entries using next/previous controls.
+- **Get random Digimon**, generates a random Digimon selection within the valid ID range, allowing users to explore without prior knowledge.
+- **Error messages for not found Digimon**, displays a toast notification when a search query returns no result, giving clear and immediate feedback.
+- **Search input validation**, ensures numeric IDs are within bounds and that name queries meet minimun and maximum length requirements, preventing invalid API calls.
+- **Language selection**, enables switching the interface between Finnish and English, updating all UI elements dynamically.
+- **Dark mode**, a theme-aware dark mode is implemented using CSS variables and Vuetify theming. This enhances visual comfort in low-light enviroments and ensures consistent styling across components.
+- **How to use / Help section**, a modal dialog guides users through key features and explains how to interact with the interface effectively.
+- **Save and delete favorites**, allows users to manage a personalized list of favorite Digimon. Items can be added or removed with immedate visual feedback.
+- **Lazy load favorite list**, loads favorite Digimon entries on demand, reducing initial load time and improving performance.
+- **Tooltips**, added tooltips to interactive elements such as buttons and icons to improve usability and clarity, especially for first-time users. Tooltips provide contextual hints without cluttering the UI.
+- **Mobile-First Design**, focused on a mobile-first approach throughout the layout and styling process. Components were initially designed for smaller screens and progressivey enhanced for tablet and desktop views using media queries.
+- **Mobile Hamburger Menu**, as part of the mobile-first design, header action buttons were moved under a hamburger menu on small screens. During the planning phase, it was identified that displaying multiple action buttons directly in the header was not intuitive on mobile devices. Grouping these actions into a hamburger menu improved usability, clarity and touch accessibility on phones.
+- **Image preload**, preloads Digimon images before dispalying them, preventing UI flicker and ensurinf smooth transitions.
 
 ## Choosing the Framework
 
