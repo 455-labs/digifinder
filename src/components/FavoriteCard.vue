@@ -82,7 +82,7 @@ export default {
     @click="$emit('select', digimon.id)"
   >
     <!-- LEFT SIDE: Digimon thumbnail + name with tooltip -->
-    <div class="d-flex align-center" v-bind="props">
+    <div class="d-flex align-center">
       <img
         :src="digimon.images[0]?.href"
         alt="Digimon image"
