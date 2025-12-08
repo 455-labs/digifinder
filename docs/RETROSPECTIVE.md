@@ -182,6 +182,10 @@ Although the team successfully implemented most of the features planned for **Di
 
   Additional language options were planned, and the corresponding JSON files were prepared in advance. However, the team did not have sufficient time to implement the necessary UI updates to fully support multiple additional languages beyond Finnish and English.
 
+- **Input Validation Prototype**
+
+  A standalone HTML/JS test page was created to validate user input against characters that appear in Digimon names. The script loads all Digimon names from a text file, builds a set of allowed characters, and highlights invalid input in real time. However, this feature was not added to the application in this form, as the validation approach did not fit the style of the existing UI.
+
 ## Issues Encountered
 
 The chosen API introduced several challenges during development.
