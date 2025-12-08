@@ -89,10 +89,9 @@ export default {
     }
 
     // ---------------------------------------------------------
-    // HELP SCREEN CONTROL (placeholder)
+    // HELP SCREEN CONTROL
     // ---------------------------------------------------------
-    // Emits an event to open a help or instructions modal. The actual
-    // help system will be implemented later.
+    // Emits an event to open a help or instructions modal.
     // ---------------------------------------------------------
     function openHelp() {
       emit('open-help')
