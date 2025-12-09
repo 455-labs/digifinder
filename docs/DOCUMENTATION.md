@@ -26,9 +26,18 @@ This document explains the basic architecture, component structure, and overall 
 
 ## App Structure
 
-```html
-App.vue ├───Header.vue ├───Main.vue | ├───SearchBar.vue | ├───DisplayDigimon.vue |
-└───DigimonData.vue ├───Footer.vue | ├───FavoritesDialog.vue | └───FavoriteCard.vue └───Toast.vue
+```
+App.vue
+├───Header.vue
+├───Main.vue
+|   ├───SearchBar.vue
+|   ├───DisplayDigimon.vue
+|   └───DigimonData.vue
+├───Footer.vue
+|
+├───FavoritesDialog.vue
+|   └───FavoriteCard.vue
+└───Toast.vue
 ```
 
 ## Project Folder Structure
