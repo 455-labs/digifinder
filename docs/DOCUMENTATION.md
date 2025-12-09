@@ -42,30 +42,35 @@ App.vue
 
 ## Project Folder Structure
 
-```html
-digifinder ├───.vscode - Contains Visual Studio Code workspace settings for this specific project.
-├───node_modules - Contains all external dependencies the project needs to run. ├───public - Static
-assets that are copied directly into the final build output. ├───src | ├───api | | └───digimonApi.js
-- Provides all API functions for fetching Digimon data and metadata from the DigiAPI. | ├───assets |
-| └───styles.css - Contains global styling and CSS variables used throughout the application. |
-├───components | | └───DigimonData.vue - Shows structured Digimon details (name, level, attributes,
-etc.) using data received from props. | | └───DisplayDigimon.vue - Displays the selected Digimon’s
-image and provides navigation and favorite toggling controls. | | └───FavoriteCard.vue - A small
-card showing a Digimon’s thumbnail and name, emitting select and remove actions. | |
-└───FavoritesDialog.vue - A modal displaying the user's saved favorites with lazy loading, removal
-options, and selection events. | | └───Footer.vue - A simple bottom bar displaying footer text and
-branding. | | └───Header.vue - The top navigation bar offering help, favorites, theme toggle, and
-language menu controls. | | └───Main.vue - The central controller that handles all Digimon fetching
-logic, navigation, and data flow between components. | | └───SearchBar.vue - A search interface that
-validates user input and emits search, random, and toast events upward. | | └───Toast.vue - A
-lightweight component that displays temporary fade-in/out notification messages. | ├───locales -
-Contains JSON files representing text resources for different languages the application supports. |
-| └───en.json | | └───fi.json | ├───stores | | └───translation.js - Manages the current language and
-exposes a reactive dictionary with functions for switching languages. | └───App.vue - The root
-component that structures the entire layout and manages dialogs and global notifications. |
-└───main.js - Initializes the Vue application by creating the app instance and mounting App.vue into
-the #app element in index.html. ├─index.html - The main HTML entry point for the application. Vite
-injects the Vue app inside this file at build time. └─ ...
+```
+digifinder
+├───.vscode                        - Contains Visual Studio Code workspace settings for this specific project.
+├───node_modules                   - Contains all external dependencies the project needs to run.
+├───public                         - Static assets that are copied directly into the final build output.
+├───src
+|   ├───api
+|   |   └───digimonApi.js          - Provides all API functions for fetching Digimon data and metadata from the DigiAPI.
+|   ├───assets
+|   |   └───styles.css             - Contains global styling and CSS variables used throughout the application.
+|   ├───components
+|   |   └───DigimonData.vue        - Shows structured Digimon details (name, level, attributes, etc.) using data received from props.
+|   |   └───DisplayDigimon.vue     - Displays the selected Digimon’s image and provides navigation and favorite toggling controls.
+|   |   └───FavoriteCard.vue       - A small card showing a Digimon’s thumbnail and name, emitting select and remove actions.
+|   |   └───FavoritesDialog.vue    - A modal displaying the user's saved favorites with lazy loading, removal options, and selection events.
+|   |   └───Footer.vue             - A simple bottom bar displaying footer text and branding.
+|   |   └───Header.vue             - The top navigation bar offering help, favorites, theme toggle, and language menu controls.
+|   |   └───Main.vue               - The central controller that handles all Digimon fetching logic, navigation, and data flow between components.
+|   |   └───SearchBar.vue          - A search interface that validates user input and emits search, random, and toast events upward.
+|   |   └───Toast.vue              - A lightweight component that displays temporary fade-in/out notification messages.
+|   ├───locales                    - Contains JSON files representing text resources for different languages the application supports.
+|   |   └───en.json
+|   |   └───fi.json
+|   ├───stores
+|   |   └───translation.js         - Manages the current language and exposes a reactive dictionary with functions for switching languages.
+|   └───App.vue                    - The root component that structures the entire layout and manages dialogs and global notifications.
+|   └───main.js                    - Initializes the Vue application by creating the app instance and mounting App.vue into the #app element in index.html.
+├─index.html                       - The main HTML entry point for the application. Vite injects the Vue app inside this file at build time.
+└─ ...
 ```
 
 ## How the Application Starts
