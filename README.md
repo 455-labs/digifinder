@@ -1,147 +1,76 @@
 # DigiFinder
 
-![Allomon](https://digi-api.com/images/digimon/w/Allomon.png)
-
-DigiFinder is a Vue-based frontend application that allows users to search for Digimon data using the DAPI (Digimon API).
+DigiFinder is a frontend web application that allows users to search for information about Digimon using an external [Digimon API](https://digi-api.com/).
 
 ## Table of Contents
 
 - [DigiFinder](#digifinder)
   - [Table of Contents](#table-of-contents)
-  - [To Do](#to-do)
-  - [Project Structure Overview](#project-structure-overview)
-    - [index.html](#indexhtml)
-    - [main.js](#mainjs)
-    - [App.vue](#appvue)
-    - [How These Files Work Together](#how-these-files-work-together)
-  - [Commit Message Guidelines](#commit-message-guidelines)
-    - [General Principles](#general-principles)
-    - [Common Prefixes and Their Usage](#common-prefixes-and-their-usage)
+  - [Description](#description)
+  - [About](#about)
+  - [Features](#features)
+  - [Install Instructions](#install-instructions)
+    - [Prerequisites](#prerequisites)
+    - [Run development server](#run-development-server)
+    - [Build for production](#build-for-production)
+  - [Authors](#authors)
 
-## To Do
+## Description
 
-- [x] Basic structure
-- [x] Search Digimon by name or id
-- [x] Get random Digimon
-- [x] Error message when Digimon is not found
-- [x] Display image and data at the same time
-- [ ] Language selection
-- [x] Dark mode
-- [x] How to use
-- [x] Save and delete favorites
-  - [x] Lazy load favorites list
-- [x] Mobile first
-- [x] Tooltips
-- [x] Hamburger menu for mobile
+DigiFinder is a Vue 3–based frontend application built to demonstrate modern component-based UI development, API integration, and state management.
 
-## Project Structure Overview
+The application allows users to search Digimon by name or ID, browse results, mark favorites, and view detailed Digimon information in a responsive and accessible interface.
 
-This project is built using **Vue 3** and **Vite**. Below is an explanation of the most important files and how they relate to each other.
+## About
 
-### index.html
+This application was developed as part of a frontend application development course at **Tampere University of Applied Sciences (TAMK)**.
 
-**The main entry HTML file of the application.**
+The goal of the course was to introduce students to selected modern frontend (browser-based) application development techniques and practices, and to train them in their practical use. The course aimed to provide students with strong foundations for building non-trivial frontend applications using modern tools and frameworks.
 
-- This is the only HTML file the browser loads.
-- Contains the root element <div id="app"></div> where the Vue app will be injected.
-- Loads the main JavaScript entry:
-  `<script type="module" src="/src/main.js"></script>`
+Another important objective of the course was to learn how to use **AI tools as part of the software development process**. AI tools were actively used in the creation of this project, including supporting code development, problem-solving, and documentation.
 
-With **Vite**, `index.html` is treated as part of the build pipeline and acts as the application’s entry point.
+## Features
 
-### main.js
+- Search Digimon by name or ID
+- Random Digimon generator
+- Detailed Digimon information view
+- Favorite Digimon system (stored in localStorage)
+- Previous / Next navigation between Digimon
+- Light and dark themes
+- Multi-language support (English & Finnish)
+- Responsive design for desktop and mobile
+- Accessible UI with validated contrast ratios
+- Toast notifications and dialogs for user feedback
 
-**The JavaScript entry point that starts the Vue application.**
+## Install Instructions
 
-This file:
+### Prerequisites
 
-1. Imports Vue
-2. Imports the root component (App.vue)
-3. Creates the Vue application instance
-4. Mounts it into the #app element inside index.html
+- Node.js (recommended LTS version)
+- npm or yarn
 
-Example:
+### Run development server
 
 ```bash
-import { createApp } from 'vue'
-import App from './App.vue'
-
-createApp(App).mount('#app')
+git clone https://github.com/455-labs/digifinder
+cd digifinder
+npm install
+npm run dev
 ```
 
-In short: `main.js` boots the application and renders `App.vue` into the page.
+The app will be available at:
+`http://localhost:5173`
 
-### App.vue
+### Build for production
 
-**The root Vue component of the entire application.**
+For building the project for production, refer to the [official Vue documentation](https://vuejs.org/guide/best-practices/production-deployment.html).
 
-This is a Single-File Component (SFC), which contains:
+## Authors
 
-- `<template>` – the HTML-like markup
-- `<script>` – logic and component behavior
-- `<style>` – component-specific styles
+This project was developed by:
 
-Example:
-
-```bash
-<template>
-  <h1>Hello from App.vue</h1>
-</template>
-
-<script>
-export default {
-  name: 'App'
-}
-</script>
-```
-
-All other components are typically children of `App.vue`.
-
-### How These Files Work Together
-
-Simple flow diagram:
-
-```
-index.html
-   ↓ loads
-src/main.js
-   ↓ mounts Vue app
-App.vue (root component)
-   ↓ includes other components
-components/YourComponent.vue
-```
-
-**index.html** – the static HTML entry<br>
-**main.js** – boots Vue<br>
-**App.vue** – the main visible component<br>
-**Other components** – build up the rest of the app<br>
-
-## Commit Message Guidelines
-
-To maintain a clear Git history, follow these unified best practices for commit messages.
-
-### General Principles
-
-- Use the imperative mood: e.g., “add feature”, not “added feature”.
-- Keep the subject line short (≤50 characters) and no period at the end.
-- If you include a body, separate it from the subject with a blank line and wrap the body at ~72 characters.
-- Each commit should address a **single purpose**. Avoid combining unrelated changes.
-
-### Common Prefixes and Their Usage
-
-Use a consistent type prefix at the start of your subject:
-
-- **feat:** for a new feature<br>
-  _Example:_ `feat: Add search functionality`
-- **fix:** for a bug fix<br>
-  _Example:_ `fix: Correct login button alignment`
-- **refactor:** for code restructuring without behavior change<br>
-  _Example:_ `refactor: Simplify API service logic`
-- **chore:** for maintenance tasks, updates to config, build scripts etc.<br>
-  _Example:_ `chore: Update dependencies to latest versions`
-- **docs:** for documentation changes<br>
-  _Example:_ `docs: Add commit message guidelines`
-- **style:** for changes that don’t affect logic (formatting, whitespace)<br>
-  Example:\_ `style: Adjust indentation in components`
-- **test:** for adding or updating tests<br>
-  _Example:_ `test: Add unit tests for utils functions`
+- Helmi Haapasaari
+- Pirjo Keskinen
+- Samu Kouhia
+- Vera Uusitalo
+- Ilkka Wahala
