@@ -9,6 +9,7 @@ DigiFinder is a frontend web application that allows users to search for informa
 - [DigiFinder](#digifinder)
   - [Table of Contents](#table-of-contents)
   - [Description](#description)
+  - [Preview](#preview)
   - [About](#about)
   - [Features](#features)
   - [Install Instructions](#install-instructions)
@@ -22,6 +23,10 @@ DigiFinder is a frontend web application that allows users to search for informa
 DigiFinder is a Vue 3–based frontend application built to demonstrate modern component-based UI development, API integration, and state management.
 
 The application allows users to search Digimon by name or ID, browse results, mark favorites, and view detailed Digimon information in a responsive and accessible interface.
+
+## Preview
+
+![DigiFinder](./docs/images/preview.png)
 
 ## About
 
