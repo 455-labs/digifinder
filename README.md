@@ -1,5 +1,7 @@
 # DigiFinder
 
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://digifinder.onrender.com/)
+
 DigiFinder is a frontend web application that allows users to search for information about Digimon using an external [Digimon API](https://digi-api.com/).
 
 ## Table of Contents
